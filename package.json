@@ -6,16 +6,61 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "serve": "nodemon server.js"
   },
   "dependencies": {
+    "@react-navigation/native": "^6.0.13",
+    "@react-navigation/native-stack": "^6.9.1",
+    "@rneui/base": "^4.0.0-rc.7",
+    "@rneui/themed": "^4.0.0-rc.7",
+    "add": "^2.0.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "expo": "~46.0.16",
     "expo-status-bar": "~1.4.0",
+    "express": "^4.18.2",
+    "formik": "^2.2.9",
+    "localforage": "^1.10.0",
+    "match-sorter": "^6.3.1",
+    "mongoose": "^6.7.2",
+    "nodemon": "^2.0.20",
     "react": "18.0.0",
-    "react-native": "0.69.6"
+    "react-dom": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-safe-area-context": "4.3.1",
+    "react-native-screens": "~3.15.0",
+    "react-native-vector-icons": "^9.2.0",
+    "react-native-web": "~0.18.7",
+    "react-router-dom": "^6.4.3-pre.2",
+    "react-router-native": "^6.4.3",
+    "serve-script": "^0.1.1",
+    "sort-by": "^1.2.0",
+    "yarn": "^1.22.19",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.9"
+    "@babel/core": "^7.12.9",
+    "@expo/webpack-config": "^0.17.0",
+    "babel-eslint": "^10.1.0",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-config-standard-jsx": "^11.0.0",
+    "eslint-config-standard-react": "^12.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.10"
   },
-  "private": true
+  "private": true,
+  "eslintConfig": {
+    "parser": "babel-eslint",
+    "extends": [
+      "standard",
+      "standard-jsx",
+      "standard-react"
+    ],
+    "rules": {
+      "react/prop-types": "off"
+    }
+  }
 }
