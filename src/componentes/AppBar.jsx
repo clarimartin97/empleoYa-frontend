@@ -1,8 +1,7 @@
 import React from "react";
 import { View, ViewPropTypes, StyleSheet, Text } from "react-native";
-import StyledText from "./StyledText.jsx";
 import Constants from "expo-constants";
-import theme from "./theme.js";
+import theme from "../theme.js";
 import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({

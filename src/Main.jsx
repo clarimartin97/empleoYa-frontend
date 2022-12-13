@@ -1,11 +1,11 @@
 import React from "react";
-import AppBar from "./AppBar.jsx";
+import AppBar from "./componentes/AppBar.jsx";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import HomeScreen from "./Screens/Home.jsx";
-import SignUp from "./Screens/SignUp.jsx";
-import LogInScreen from "./Screens/LogIn.jsx";
-import InfoUsuario from "./Screens/Usuarios.jsx";
+import HomeScreen from "./screens/Home.jsx";
+import SignUp from "./screens/SignUp.jsx";
+import LogInScreen from "./screens/LogIn.jsx";
+import InfoUsuario from "./screens/Usuarios.jsx";
 
 const Stack = createNativeStackNavigator();
 const Main = () => {

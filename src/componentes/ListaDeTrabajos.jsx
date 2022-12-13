@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, FlatList } from "react-native";
-import { urlBase } from "./Screens/Home";
+import { urlBase } from "../screens/Home.jsx";
 import ItemTrabajo from "./ItemTrabajo.jsx";
 import { useEffect, useState } from "react";
 

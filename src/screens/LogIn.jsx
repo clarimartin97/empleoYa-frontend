@@ -1,14 +1,12 @@
 import React from "react";
 import { Formik, useField } from "formik";
 import { StyleSheet, View } from "react-native";
-import { Button } from "@rneui/themed";
-import StyledTextInput from "../StyledTextInput.jsx";
-import StyledText from "../StyledText.jsx";
+import { Button, ButtonGroup, withTheme } from "@rneui/themed";
+import StyledTextInput from "../componentes/StyledTextInput.jsx";
+import StyledText from "../componentes/StyledText.jsx";
 import { loginValidationSchema } from "../validationSchemas/login.js";
 
 const initialValues = {
-  nombre: "",
-  apellido: "",
   mail: "",
   contrasena: "",
 };
@@ -40,7 +38,7 @@ const FormikInputValue = ({ name, ...props }) => {
   );
 };
 
-export default function SignUp(props) {
+export default function LogInScreen(props) {
   const { navigation } = props;
   const navegarAHome = () => {
     navigation.navigate("Home");
@@ -57,8 +55,6 @@ export default function SignUp(props) {
           <View style={styles.form}>
             <Button title="Ir al inicio" onPress={navegarAHome} />
 
-            <FormikInputValue name="nombre" placeholder="Escribir nombre" />
-            <FormikInputValue name="apellido" placeholder="Escribir apellido" />
             <FormikInputValue name="mail" placeholder="Escribir E-mail" />
 
             <FormikInputValue
@@ -67,7 +63,7 @@ export default function SignUp(props) {
               secureTextEntry
             />
 
-            <Button onPress={handleSubmit} title="Crear cuenta" />
+            <Button onPress={handleSubmit} title="Iniciar Sesión" />
           </View>
         );
       }}

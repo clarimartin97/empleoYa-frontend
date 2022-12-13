@@ -1,7 +1,7 @@
-export const urlBase = "http://192.168.0.171:8000/";
+export const urlBase = "http://192.168.1.2:8000/";
 import React from "react-native";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
-import ListaTrabajos from "../ListaDeTrabajos.jsx";
+import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import { View } from "react-native";
 
 function HomeScreen(props) {

@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import StyledText from "./StyledText.jsx";
 import HeaderEmpresa from "./HeaderEmpresa.jsx";
 import BotonPostulaciones from "./BotonPostulaciones.jsx";
-import { urlBase } from "./Screens/Home.jsx";
+import { urlBase } from "../screens/Home.jsx";
 import { useState } from "react";
 
 const styles = StyleSheet.create({

@@ -3,7 +3,7 @@ import { urlBase } from "./Home.jsx";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import { View, Image, StyleSheet } from "react-native";
 import theme from "../theme.js";
-import StyledText from "../StyledText.jsx";
+import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 
 function InfoUsuario(props) {
