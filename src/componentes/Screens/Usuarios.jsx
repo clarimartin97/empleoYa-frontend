@@ -3,7 +3,6 @@ import { urlBase } from "./Home.jsx";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import { View, Image, StyleSheet } from "react-native";
 import theme from "../theme.js";
-import appInfo from "../data/appInfo.js";
 import StyledText from "../StyledText.jsx";
 import { useEffect, useState } from "react";
 

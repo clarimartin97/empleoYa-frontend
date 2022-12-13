@@ -1,14 +1,31 @@
 import React from "react";
 import { Text, FlatList } from "react-native";
-import appInfo from "./data/appInfo.js";
+import { urlBase } from "./Screens/Home";
 import ItemTrabajo from "./ItemTrabajo.jsx";
+import { useEffect, useState } from "react";
 
 function ListaTrabajos() {
+  const [trabajos, setTrabajos] = useState([]);
+  useEffect(() => {
+    getData();
+  }, []);
+
+  const getData = async () => {
+    const trabajosUrl = `${urlBase}trabajos/6377de44f8af6fd15438d0c4`;
+    console.log(trabajosUrl);
+    const response = await fetch(trabajosUrl);
+    console.log("response: " + response);
+    const data = await response.json();
+    setTrabajos(data);
+  };
+
   return (
     <FlatList
-      data={appInfo}
+      data={trabajos}
       ItemSeparatorComponent={() => <Text></Text>}
-      renderItem={({ item: info }) => <ItemTrabajo {...info} />}
+      renderItem={({ item: info }) => {
+        return <ItemTrabajo {...info} />;
+      }}
     ></FlatList>
   );
 }
