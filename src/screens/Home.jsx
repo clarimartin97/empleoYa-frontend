@@ -17,9 +17,13 @@ function HomeScreen(props) {
   }, []);
 
   const onSearchPress = async (ubicacion, nombreDelPuesto) => {
-    console.log(ubicacion, nombreDelPuesto);
+    if (ubicacion === "") ubicacion = ".*";
+    if (nombreDelPuesto === "") nombreDelPuesto = ".*";
+    console.log(ubicacion);
+    console.log(nombreDelPuesto);
     getId().then(async (idUsuario) => {
       const trabajosUrl = `${urlBase}trabajos/${idUsuario}/${ubicacion}/${nombreDelPuesto}`;
+      console.log(trabajosUrl);
       const response = await fetch(trabajosUrl);
       const data = await response.json();
       setTrabajos(data);

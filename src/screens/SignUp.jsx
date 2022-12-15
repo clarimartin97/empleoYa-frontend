@@ -3,7 +3,7 @@ import { Formik, useField } from "formik";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
-import { loginValidationSchema } from "../validationSchemas/login.js";
+import { validationSchema } from "../validationSchemas/validacion.js";
 import { urlBase } from "./Home.jsx";
 import { storeData } from "../helpers/AsyncStorageHelper.js";
 
@@ -65,7 +65,7 @@ export default function SignUp(props) {
 
   return (
     <Formik
-      validator={() => {}}
+      validationSchema={validationSchema}
       initialValues={initialValues}
       onSubmit={(values) => {
         postData(
