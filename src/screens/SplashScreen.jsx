@@ -1,5 +1,12 @@
 import React from "react-native";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TextInput,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { useEffect } from "react";
 import {
   getApellido,
@@ -43,14 +50,26 @@ function SplashScreen(props) {
 
   return (
     <View style={styles.container}>
-      <Text>Holiii</Text>
+      <Image style={styles.image} source={require("../../assets/logo.png")} />
+
+      <View>
+        <ActivityIndicator size={30} color="#183d8a" />
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 10,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "100%",
+  },
+  image: {
+    width: 150,
+    height: 150,
+    alignSelf: "center",
   },
 });
 

@@ -19,34 +19,69 @@ const Main = () => {
     <NavigationContainer>
       <AppBar />
       <Menu.Navigator initialRouteName="Splash">
-        <Menu.Screen name="Home" title="Inicio" component={HomeScreen} />
-        <Menu.Screen name="SignUp" title="Registrarme" component={SignUp} />
+        <Menu.Screen
+          name="Home"
+          options={{
+            title: "Inicio",
+          }}
+          component={HomeScreen}
+        />
+
         <Menu.Screen
           name="MisPostulaciones"
-          title="Mis Postulaciones"
+          options={{
+            title: "Mis postulaciones",
+          }}
           component={MisPostulaciones}
         />
         <Menu.Screen
           name="Usuario"
-          title="Mi usuario"
+          options={{
+            title: "Mi Usuario",
+          }}
           component={InfoUsuario}
         />
         <Menu.Screen
+          name="SignUp"
+          options={{
+            title: "Registrarme",
+            /*          headerShown: false,
+            drawerItemStyle: {
+              display: "none",
+            }, */
+          }}
+          component={SignUp}
+        />
+        <Menu.Screen
           name="LogIn"
-          title="Iniciar Sesion"
+          options={{
+            title: "Iniciar Sesión",
+            /*    headerShown: false,
+            drawerItemStyle: {
+              display: "none",
+            }, */
+          }}
           component={LogInScreen}
         />
+
+        <Menu.Screen
+          name="LogOut"
+          options={{
+            title: "Cerrar Sesión",
+          }}
+          component={LogOut}
+        />
+
         <Menu.Screen
           name="Splash"
           component={SplashScreen}
           options={{
+            headerShown: false,
             drawerItemStyle: {
               display: "none",
             },
           }}
         />
-
-        <Menu.Screen name="LogOut" component={LogOut} />
       </Menu.Navigator>
     </NavigationContainer>
   );

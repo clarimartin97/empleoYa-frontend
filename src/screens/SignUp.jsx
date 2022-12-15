@@ -1,7 +1,6 @@
 import React from "react";
 import { Formik, useField } from "formik";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
-import { Button } from "@rneui/themed";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
 import { loginValidationSchema } from "../validationSchemas/login.js";
@@ -82,10 +81,8 @@ export default function SignUp(props) {
           <View style={styles.container}>
             <View style={styles.form}>
               <Image
-                style={styles.logo}
-                source={{
-                  uri: "https://www.freepnglogos.com/uploads/new-balance-png-logo/red-new-icon-png-logo-33.png",
-                }}
+                style={styles.image}
+                source={require("../../assets/logo.png")}
               />
 
               <FormikInputValue name="nombre" placeholder="Escribir nombre" />
@@ -120,29 +117,32 @@ const styles = StyleSheet.create({
     marginTop: -5,
   },
   form: {
-    margin: 12,
+    padding: 20,
+    paddingVertical: 40,
   },
   container: {
     alignContent: "center",
     textAlign: "center",
-    padding: 20,
   },
-  logo: {
+  image: {
     width: 100,
     height: 100,
     alignContent: "center",
     alignSelf: "center",
-    margin: 20,
   },
   botoncin: {
-    width: 100,
-    height: 46,
-    backgroundColor: "#0080FF",
+    width: 180,
+    height: 50,
+    backgroundColor: "#183d8a",
     borderRadius: 8,
     alignSelf: "center",
     padding: 5,
+    justifyContent: "center",
   },
   textoBotoncin: {
     color: "white",
+    fontSize: 16,
+    alignSelf: "center",
+    fontWeight: "bold",
   },
 });
