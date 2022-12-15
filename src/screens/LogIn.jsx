@@ -3,7 +3,10 @@ import { Formik, useField } from "formik";
 import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
-import { validationSchema } from "../validationSchemas/validacion.js";
+import {
+  logInValidationSchema,
+  validationSchema,
+} from "../validationSchemas/validacion.js";
 import { urlBase } from "./Home.jsx";
 import { storeData } from "../helpers/AsyncStorageHelper.js";
 
@@ -35,6 +38,7 @@ export default function LogInScreen(props) {
 
   const postData = async (mail, contrasena) => {
     const loginUrl = `${urlBase}login`;
+    console.log(loginUrl);
     const response = await fetch(loginUrl, {
       method: "POST",
       headers: {
@@ -42,7 +46,7 @@ export default function LogInScreen(props) {
       },
       body: JSON.stringify({
         mail: mail,
-        contraseña: contrasena,
+        contrasena: contrasena,
       }),
     })
       .then((respuesta) => respuesta.json())
@@ -61,9 +65,10 @@ export default function LogInScreen(props) {
 
   return (
     <Formik
-      validationSchema={validationSchema}
+      validationSchema={logInValidationSchema}
       initialValues={initialValues}
       onSubmit={(values) => {
+        console.log("hola!!");
         postData(values.mail, values.contrasena);
       }}
     >
