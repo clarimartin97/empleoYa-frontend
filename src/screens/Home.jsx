@@ -3,11 +3,14 @@ import React from "react-native";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import { View } from "react-native";
+import { getNombre } from "../helpers/AsyncStorageHelper.js";
 
 function HomeScreen(props) {
   const { navigation } = props;
 
-  const navegarASignUp = () => {
+  getNombre().then((a) => console.log(a));
+
+  /*   const navegarASignUp = () => {
     navigation.navigate("SignIn");
   };
   const navegarALogIn = () => {
@@ -15,12 +18,9 @@ function HomeScreen(props) {
   };
   const navegarAUsuario = () => {
     navigation.navigate("Usuario");
-  };
+  }; */
   return (
     <View>
-      <Button title="Registrarme" onPress={navegarASignUp} />
-      <Button title="Iniciar sesion" onPress={navegarALogIn} />
-      <Button title="Mi Usuario" onPress={navegarAUsuario} />
       <ListaTrabajos />
     </View>
   );

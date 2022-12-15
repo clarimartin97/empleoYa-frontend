@@ -6,26 +6,48 @@ import HomeScreen from "./screens/Home.jsx";
 import SignUp from "./screens/SignUp.jsx";
 import LogInScreen from "./screens/LogIn.jsx";
 import InfoUsuario from "./screens/Usuarios.jsx";
+import SplashScreen from "./screens/SplashScreen.jsx";
+import "react-native-gesture-handler";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import MisPostulaciones from "./screens/MisPostulaciones.jsx";
+import LogOut from "./screens/LogOut.jsx";
 
+const Menu = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
 const Main = () => {
   return (
     <NavigationContainer>
       <AppBar />
-      <Stack.Navigator initialRouteName="Home">
-        <Stack.Screen name="Home" title="Home" component={HomeScreen} />
-        <Stack.Screen name="SignIn" title="Registrarme" component={SignUp} />
-        <Stack.Screen
+      <Menu.Navigator initialRouteName="Splash">
+        <Menu.Screen name="Home" title="Inicio" component={HomeScreen} />
+        <Menu.Screen name="SignUp" title="Registrarme" component={SignUp} />
+        <Menu.Screen
+          name="MisPostulaciones"
+          title="Mis Postulaciones"
+          component={MisPostulaciones}
+        />
+        <Menu.Screen
           name="Usuario"
           title="Mi usuario"
           component={InfoUsuario}
         />
-        <Stack.Screen
+        <Menu.Screen
           name="LogIn"
           title="Iniciar Sesion"
           component={LogInScreen}
         />
-      </Stack.Navigator>
+        <Menu.Screen
+          name="Splash"
+          component={SplashScreen}
+          options={{
+            drawerItemStyle: {
+              display: "none",
+            },
+          }}
+        />
+
+        <Menu.Screen name="LogOut" component={LogOut} />
+      </Menu.Navigator>
     </NavigationContainer>
   );
 };

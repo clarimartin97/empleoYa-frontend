@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 function ItemTrabajo(props) {
   const [trabajo, setTrabajo] = useState({ ...props });
 
-  const getData = async (idUsuario, idTrabajo) => {
+  const postData = async (idUsuario, idTrabajo) => {
     const trabajosUrl = `${urlBase}postulacion`;
     console.log(trabajosUrl);
     const response = await fetch(trabajosUrl, {
@@ -62,8 +62,8 @@ function ItemTrabajo(props) {
         habilitado={!trabajo.estaPostulado}
         onPress={() => {
           const idTrabajo = trabajo._id;
-          const idUsuario = "6377de44f8af6fd15438d0c4";
-          getData(idUsuario, idTrabajo);
+          const idUsuario = "639a65c7754feb9679a7000d";
+          postData(idUsuario, idTrabajo);
         }}
       />
     </View>

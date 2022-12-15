@@ -20,14 +20,21 @@ const styles = StyleSheet.create({
   habilitado: {
     height: 40,
     flex: 1,
-    width: 60,
+    width: 100,
     backgroundColor: "blue",
+    borderRadius: 8,
+    alignSelf: "center",
+    alignItems: "center",
   },
 
   deshabilitado: {
     flex: 1,
-    width: 60,
+    height: 40,
+    width: 100,
     backgroundColor: "gray",
+    borderRadius: 8,
+    alignSelf: "center",
+    alignItems: "center",
   },
 });
 

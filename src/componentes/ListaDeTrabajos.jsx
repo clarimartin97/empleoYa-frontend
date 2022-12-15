@@ -11,10 +11,9 @@ function ListaTrabajos() {
   }, []);
 
   const getData = async () => {
-    const trabajosUrl = `${urlBase}trabajos/6377de44f8af6fd15438d0c4`;
-    console.log(trabajosUrl);
+    const idUsuario = "639a65c7754feb9679a7000d";
+    const trabajosUrl = `${urlBase}trabajos/${idUsuario}`;
     const response = await fetch(trabajosUrl);
-    console.log("response: " + response);
     const data = await response.json();
     setTrabajos(data);
   };
