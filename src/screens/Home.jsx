@@ -41,7 +41,7 @@ function HomeScreen(props) {
   return (
     <View>
       <Busqueda onSearchPress={onSearchPress} />
-      <ListaTrabajos trabajos={trabajos} />
+      <ListaTrabajos trabajos={trabajos} puedoPostularme={true} />
     </View>
   );
 }

@@ -4,35 +4,40 @@ import { View, Image, StyleSheet, Text, TextInput } from "react-native";
 import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
+import { getId } from "../helpers/AsyncStorageHelper.js";
+import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 
 function MisPostulaciones(props) {
   const { navigation } = props;
-
-  const navegarASignUp = () => {
-    navigation.navigate("SignIn");
-  };
-  const navegarALogIn = () => {
-    navigation.navigate("LogIn");
-  };
-
+  const [postulaciones, setPostulaciones] = useState([]);
   useEffect(() => {
+    console.log("aloha");
     getData();
   }, []);
 
   const getData = async () => {
-    // const usersUrl = `${urlBase}usuarios`;
-    // console.log(usersUrl);
-    // const response = await fetch(usersUrl);
-    // const data = await response.json();
+    getId().then(async (idUsuario) => {
+      const postulacionesUrl = `${urlBase}postulaciones/${idUsuario}`;
+      console.log(postulacionesUrl);
+      const response = await fetch(postulacionesUrl);
+      const data = await response.json();
+      setPostulaciones(data);
+    });
   };
+  console.log("---");
+  console.log(postulaciones);
 
   return (
     <View style={styles.container}>
-      <View style={{ justifyContent: "center" }}>
-        <StyledText align="center" fontWeight="bold">
-          Mis Postulaciones
-        </StyledText>
-      </View>
+      <ListaTrabajos
+        trabajos={postulaciones.map((e) => {
+          return { ...e.trabajo, idPostulacion: e._id };
+        })}
+        puedoPostularme={false}
+        deleteItem={() => {
+          getData();
+        }}
+      />
     </View>
   );
 }
