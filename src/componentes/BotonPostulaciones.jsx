@@ -5,36 +5,42 @@ const BotonPostulaciones = ({ habilitado, onPress }) => {
   if (habilitado)
     return (
       <TouchableOpacity style={styles.habilitado} onPress={() => onPress()}>
-        <Text>Postularme</Text>
+        <Text style={styles.textoBotoncin}>Postularme</Text>
       </TouchableOpacity>
     );
   else
     return (
       <TouchableOpacity style={styles.deshabilitado}>
-        <Text>Postularme</Text>
+        <Text style={styles.textoBotoncin}>Postularme</Text>
       </TouchableOpacity>
     );
 };
 
 const styles = StyleSheet.create({
   habilitado: {
+    width: 120,
     height: 40,
-    flex: 1,
-    width: 100,
-    backgroundColor: "blue",
+    backgroundColor: "#183d8a",
     borderRadius: 8,
     alignSelf: "center",
-    alignItems: "center",
+    padding: 5,
+    justifyContent: "center",
   },
 
   deshabilitado: {
-    flex: 1,
+    width: 120,
     height: 40,
-    width: 100,
-    backgroundColor: "gray",
+    backgroundColor: "#9B9999",
     borderRadius: 8,
     alignSelf: "center",
-    alignItems: "center",
+    padding: 5,
+    justifyContent: "center",
+  },
+  textoBotoncin: {
+    color: "white",
+    fontSize: 14,
+    alignSelf: "center",
+    fontWeight: "bold",
   },
 });
 

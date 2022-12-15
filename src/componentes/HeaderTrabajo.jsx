@@ -3,7 +3,7 @@ import { Image, View, StyleSheet } from "react-native";
 import StyledText from "./StyledText.jsx";
 import theme from "../theme.js";
 
-const HeaderEmpresa = ({
+const HeaderTrabajo = ({
   logo,
   nombreDeLaEmpresa,
   modalidad,
@@ -56,4 +56,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HeaderEmpresa;
+export default HeaderTrabajo;

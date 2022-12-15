@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import StyledText from "./StyledText.jsx";
-import HeaderEmpresa from "./HeaderEmpresa.jsx";
+import HeaderTrabajo from "./HeaderTrabajo.jsx";
 import BotonPostulaciones from "./BotonPostulaciones.jsx";
 import { urlBase } from "../screens/Home.jsx";
 import { useState } from "react";
@@ -48,7 +48,7 @@ function ItemTrabajo(props) {
 
   return (
     <View key={trabajo._id} style={styles.container}>
-      <HeaderEmpresa {...trabajo} />
+      <HeaderTrabajo {...trabajo} />
       <StyledText fontSize="subheading" fontWeight="bold">
         Nombre del puesto: {trabajo.nombreDelPuesto}
       </StyledText>

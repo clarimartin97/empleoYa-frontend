@@ -1,17 +1,13 @@
 import React from "react";
-import { Formik, useField } from "formik";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
-import { loginValidationSchema } from "../validationSchemas/login.js";
-import { urlBase } from "./Home.jsx";
-import { storeData } from "../helpers/AsyncStorageHelper.js";
+import { Formik, useField } from "formik";
 
 const initialValues = {
-  mail: "",
-  contrasena: "",
+  ubicacion: "",
+  nombreDelPuesto: "",
 };
-
 const FormikInputValue = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name);
   return (
@@ -27,68 +23,36 @@ const FormikInputValue = ({ name, ...props }) => {
   );
 };
 
-export default function LogInScreen(props) {
-  const { navigation } = props;
-  const navegarAHome = () => {
-    navigation.navigate("Home");
-  };
-
-  const postData = async (mail, contrasena) => {
-    const loginUrl = `${urlBase}login`;
-    const response = await fetch(loginUrl, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        mail: mail,
-        contraseña: contrasena,
-      }),
-    })
-      .then((respuesta) => respuesta.json())
-      .then((datos) => {
-        if (!datos.error) {
-          //loguear
-          console.log(datos);
-          storeData(datos._id, datos.nombre, datos.apellido, datos.mail);
-          navegarAHome();
-        } else {
-          //error
-          alert("E-mail o contraseña incorrecto");
-        }
-      });
-  };
-
+export default function Busqueda({ onSearchPress }) {
   return (
     <Formik
       validator={() => {}}
       initialValues={initialValues}
-      onSubmit={(values) => {
-        postData(values.mail, values.contrasena);
+      onSubmit={({ ubicacion, nombreDelPuesto }) => {
+        onSearchPress(ubicacion, nombreDelPuesto);
+
+        /*   postData(values.mail, values.contrasena); */
       }}
     >
       {({ handleSubmit }) => {
         return (
           <View style={styles.container}>
             <View style={styles.form}>
-              <Image
-                style={styles.image}
-                source={require("../../assets/logo.png")}
+              <FormikInputValue
+                name="ubicacion"
+                placeholder="Escribir ubicación"
               />
 
-              <FormikInputValue name="mail" placeholder="Escribir E-mail" />
-
               <FormikInputValue
-                name="contrasena"
-                placeholder="Escribir contraseña"
-                secureTextEntry
+                name="nombreDelPuesto"
+                placeholder="Escribir puesto"
               />
               <TouchableOpacity
                 style={styles.botoncin}
-                title="Iniciar Sesión"
+                title="Buscae"
                 onPress={handleSubmit}
               >
-                <Text style={styles.textoBotoncin}>Iniciar Sesión</Text>
+                <Text style={styles.textoBotoncin}> Buscar</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -99,12 +63,12 @@ export default function LogInScreen(props) {
 }
 
 const styles = StyleSheet.create({
-  error: {
+  /*   error: {
     color: "red",
     fontSize: 13,
     marginBottom: 20,
     marginTop: -5,
-  },
+  }, */
   form: {
     padding: 20,
     paddingVertical: 40,

@@ -3,25 +3,41 @@ import React from "react-native";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import { View } from "react-native";
-import { getNombre } from "../helpers/AsyncStorageHelper.js";
+import { getId, getNombre } from "../helpers/AsyncStorageHelper.js";
+import Busqueda from "../componentes/Busqueda.jsx";
+import { useState, useEffect } from "react";
 
 function HomeScreen(props) {
   const { navigation } = props;
+  const [trabajos, setTrabajos] = useState([]);
 
   getNombre().then((a) => console.log(a));
+  useEffect(() => {
+    getData();
+  }, []);
 
-  /*   const navegarASignUp = () => {
-    navigation.navigate("SignIn");
+  const onSearchPress = async (ubicacion, nombreDelPuesto) => {
+    console.log(ubicacion, nombreDelPuesto);
+    getId().then(async (idUsuario) => {
+      const trabajosUrl = `${urlBase}trabajos/${idUsuario}/${ubicacion}/${nombreDelPuesto}`;
+      const response = await fetch(trabajosUrl);
+      const data = await response.json();
+      setTrabajos(data);
+    });
   };
-  const navegarALogIn = () => {
-    navigation.navigate("LogIn");
+
+  const getData = async () => {
+    getId().then(async (idUsuario) => {
+      const trabajosUrl = `${urlBase}trabajos/${idUsuario}`;
+      const response = await fetch(trabajosUrl);
+      const data = await response.json();
+      setTrabajos(data);
+    });
   };
-  const navegarAUsuario = () => {
-    navigation.navigate("Usuario");
-  }; */
   return (
     <View>
-      <ListaTrabajos />
+      <Busqueda onSearchPress={onSearchPress} />
+      <ListaTrabajos trabajos={trabajos} />
     </View>
   );
 }

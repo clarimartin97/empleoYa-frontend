@@ -1,34 +1,27 @@
 import React from "react";
-import { Text, FlatList } from "react-native";
-import { urlBase } from "../screens/Home.jsx";
+import { Text, StyleSheet, View } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import ItemTrabajo from "./ItemTrabajo.jsx";
-import { useEffect, useState } from "react";
-import { getId } from "../helpers/AsyncStorageHelper.js";
 
-function ListaTrabajos() {
-  const [trabajos, setTrabajos] = useState([]);
-  useEffect(() => {
-    getData();
-  }, []);
-
-  const getData = async () => {
-    getId().then(async (idUsuario) => {
-      const trabajosUrl = `${urlBase}trabajos/${idUsuario}`;
-      const response = await fetch(trabajosUrl);
-      const data = await response.json();
-      setTrabajos(data);
-    });
+function ListaTrabajos({ trabajos }) {
+  const keyExtractor = (item) => {
+    return item._id;
   };
-
   return (
-    <FlatList
-      data={trabajos}
-      ItemSeparatorComponent={() => <Text></Text>}
-      renderItem={({ item: info }) => {
-        return <ItemTrabajo {...info} />;
-      }}
-    ></FlatList>
+    <View style={styles.container}>
+      <FlatList
+        data={trabajos}
+        // ItemSeparatorComponent={() => <Text></Text>}
+        keyExtractor={keyExtractor}
+        renderItem={({ item: info }) => {
+          return <ItemTrabajo {...info} />;
+        }}
+      ></FlatList>
+    </View>
   );
 }
+const styles = StyleSheet.create({
+  container: { height: "60%" },
+});
 
 export default ListaTrabajos;
