@@ -5,6 +5,7 @@ import HeaderEmpresa from "./HeaderEmpresa.jsx";
 import BotonPostulaciones from "./BotonPostulaciones.jsx";
 import { urlBase } from "../screens/Home.jsx";
 import { useState } from "react";
+import { getId } from "../helpers/AsyncStorageHelper.js";
 
 const styles = StyleSheet.create({
   container: {
@@ -23,6 +24,7 @@ function ItemTrabajo(props) {
   const [trabajo, setTrabajo] = useState({ ...props });
 
   const postData = async (idUsuario, idTrabajo) => {
+    console.log(idUsuario);
     const trabajosUrl = `${urlBase}postulacion`;
     console.log(trabajosUrl);
     const response = await fetch(trabajosUrl, {
@@ -62,8 +64,10 @@ function ItemTrabajo(props) {
         habilitado={!trabajo.estaPostulado}
         onPress={() => {
           const idTrabajo = trabajo._id;
-          const idUsuario = "639a65c7754feb9679a7000d";
-          postData(idUsuario, idTrabajo);
+          getId().then((idUsuario) => {
+            console.log(idUsuario);
+            postData(idUsuario, idTrabajo);
+          });
         }}
       />
     </View>

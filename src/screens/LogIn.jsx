@@ -50,7 +50,7 @@ export default function LogInScreen(props) {
         if (!datos.error) {
           //loguear
           console.log(datos);
-          storeData(datos.nombre, datos.apellido, datos.mail);
+          storeData(datos._id, datos.nombre, datos.apellido, datos.mail);
           navegarAHome();
         } else {
           //error

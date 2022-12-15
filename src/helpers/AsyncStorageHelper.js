@@ -2,9 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 const NOMBRE_USUARIO_KEY = "nombre_usuario";
 const APELLIDO_USUARIO_KEY = "apellido_usuario";
 const MAIL_USUARIO_KEY = "mail_usuario";
+const ID_USUARIO_KEY = "id_usuario";
 
-export const storeData = async (nombre, apellido, mail) => {
+export const storeData = async (id, nombre, apellido, mail) => {
+    console.log(id)
     try {
+        await AsyncStorage.setItem(ID_USUARIO_KEY, id);
         await AsyncStorage.setItem(NOMBRE_USUARIO_KEY, nombre);
         await AsyncStorage.setItem(APELLIDO_USUARIO_KEY, apellido);
         await AsyncStorage.setItem(MAIL_USUARIO_KEY, mail);
@@ -14,6 +17,14 @@ export const storeData = async (nombre, apellido, mail) => {
     }
 }
 
+export const getId = async () => {
+    try {
+        return await AsyncStorage.getItem(ID_USUARIO_KEY);
+    }
+    catch (e) {
+        console.log("error getId: " + e);
+    }
+}
 export const getNombre = async () => {
     try {
         return await AsyncStorage.getItem(NOMBRE_USUARIO_KEY);

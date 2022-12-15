@@ -10,6 +10,7 @@ import {
 import { useEffect } from "react";
 import {
   getApellido,
+  getId,
   getMail,
   getNombre,
 } from "../helpers/AsyncStorageHelper.js";
@@ -26,16 +27,21 @@ function SplashScreen(props) {
 
   const timerFunction = () => {
     setTimeout(() => {
-      getNombre().then((n) => {
-        console.log(n);
-        if (n != null) {
-          getApellido().then((a) => {
-            console.log(a);
-            if (a != null) {
-              getMail().then((m) => {
-                console.log(m);
-                if (m != null) navegarAHome();
-                else navegarALogin();
+      getId().then((id) => {
+        console.log(id);
+        if (id != null) {
+          getNombre().then((n) => {
+            console.log(n);
+            if (n != null) {
+              getApellido().then((a) => {
+                console.log(a);
+                if (a != null) {
+                  getMail().then((m) => {
+                    console.log(m);
+                    if (m != null) navegarAHome();
+                    else navegarALogin();
+                  });
+                } else navegarALogin();
               });
             } else navegarALogin();
           });

@@ -3,6 +3,7 @@ import { Text, FlatList } from "react-native";
 import { urlBase } from "../screens/Home.jsx";
 import ItemTrabajo from "./ItemTrabajo.jsx";
 import { useEffect, useState } from "react";
+import { getId } from "../helpers/AsyncStorageHelper.js";
 
 function ListaTrabajos() {
   const [trabajos, setTrabajos] = useState([]);
@@ -11,11 +12,12 @@ function ListaTrabajos() {
   }, []);
 
   const getData = async () => {
-    const idUsuario = "639a65c7754feb9679a7000d";
-    const trabajosUrl = `${urlBase}trabajos/${idUsuario}`;
-    const response = await fetch(trabajosUrl);
-    const data = await response.json();
-    setTrabajos(data);
+    getId().then(async (idUsuario) => {
+      const trabajosUrl = `${urlBase}trabajos/${idUsuario}`;
+      const response = await fetch(trabajosUrl);
+      const data = await response.json();
+      setTrabajos(data);
+    });
   };
 
   return (

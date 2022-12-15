@@ -54,7 +54,7 @@ export default function SignUp(props) {
       .then((datos) => {
         if (!datos.error) {
           //loguear
-          storeData(nombre, apellido, mail);
+          storeData(datos._id, nombre, apellido, mail);
           navegarAHome();
         } else {
           //error
