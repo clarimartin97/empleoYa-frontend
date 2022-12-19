@@ -7,7 +7,7 @@ import {
   logInValidationSchema,
   validationSchema,
 } from "../validationSchemas/validacion.js";
-import { urlBase } from "./Home.jsx";
+import { urlBase } from "../helpers/constantes";
 import { storeData } from "../helpers/AsyncStorageHelper.js";
 
 const initialValues = {

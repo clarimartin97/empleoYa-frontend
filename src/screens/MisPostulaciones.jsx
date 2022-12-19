@@ -1,5 +1,5 @@
 import React from "react-native";
-import { urlBase } from "./Home.jsx";
+import { urlBase } from "../helpers/constantes";
 import { View, Image, StyleSheet, Text, TextInput } from "react-native";
 import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";

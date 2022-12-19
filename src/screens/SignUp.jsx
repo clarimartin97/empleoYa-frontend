@@ -4,7 +4,7 @@ import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
 import { signUpValidationSchema } from "../validationSchemas/validacion.js";
-import { urlBase } from "./Home.jsx";
+import { urlBase } from "../helpers/constantes";
 import { storeData } from "../helpers/AsyncStorageHelper.js";
 
 const initialValues = {

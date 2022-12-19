@@ -3,7 +3,7 @@ import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import StyledText from "./StyledText.jsx";
 import HeaderTrabajo from "./HeaderTrabajo.jsx";
 import BotonPostulaciones from "./BotonPostulaciones.jsx";
-import { urlBase } from "../screens/Home.jsx";
+import { urlBase } from "../helpers/constantes";
 import { useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
 

@@ -1,4 +1,3 @@
-export const urlBase = "http://192.168.0.171:8000/";
 import React from "react-native";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
@@ -6,6 +5,7 @@ import { View } from "react-native";
 import { getId, getNombre } from "../helpers/AsyncStorageHelper.js";
 import Busqueda from "../componentes/Busqueda.jsx";
 import { useState, useEffect } from "react";
+import { urlBase } from "../helpers/constantes";
 
 function HomeScreen(props) {
   const { navigation } = props;
