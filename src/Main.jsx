@@ -45,10 +45,10 @@ const Main = () => {
           name="SignUp"
           options={{
             title: "Registrarme",
-            /*          headerShown: false,
+            headerShown: false,
             drawerItemStyle: {
               display: "none",
-            }, */
+            },
           }}
           component={SignUp}
         />
@@ -56,10 +56,10 @@ const Main = () => {
           name="LogIn"
           options={{
             title: "Iniciar Sesión",
-            /*    headerShown: false,
+            headerShown: false,
             drawerItemStyle: {
               display: "none",
-            }, */
+            },
           }}
           component={LogInScreen}
         />

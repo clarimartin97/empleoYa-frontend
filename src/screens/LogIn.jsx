@@ -35,6 +35,9 @@ export default function LogInScreen(props) {
   const navegarAHome = () => {
     navigation.navigate("Home");
   };
+  const navegarASignUp = () => {
+    navigation.navigate("SignUp");
+  };
 
   const postData = async (mail, contrasena) => {
     const loginUrl = `${urlBase}login`;
@@ -95,6 +98,9 @@ export default function LogInScreen(props) {
               >
                 <Text style={styles.textoBotoncin}>Iniciar Sesión</Text>
               </TouchableOpacity>
+              <TouchableOpacity style={styles.link} onPress={navegarASignUp}>
+                <Text style={styles.linkTexto}>O Registrate</Text>
+              </TouchableOpacity>
             </View>
           </View>
         );
@@ -138,5 +144,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
+  },
+  link: {
+    width: 180,
+    height: 50,
+    alignSelf: "center",
+    padding: 5,
+  },
+  linkTexto: {
+    color: "#183d8a",
+    textAlign: "center",
   },
 });

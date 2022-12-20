@@ -34,7 +34,9 @@ export default function SignUp(props) {
   const navegarAHome = () => {
     navigation.navigate("Home");
   };
-
+  const navegarALogIn = () => {
+    navigation.navigate("LogIn");
+  };
   const postData = async (nombre, apellido, mail, contrasena) => {
     const usuariosUrl = `${urlBase}signup`;
     const response = await fetch(usuariosUrl, {
@@ -102,7 +104,12 @@ export default function SignUp(props) {
               />
 
               <TouchableOpacity style={styles.botoncin} onPress={handleSubmit}>
-                <Text style={styles.textoBotoncin}> Crear cuenta</Text>
+                <Text style={styles.textoBotoncin}>Crear cuenta</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.link} onPress={navegarALogIn}>
+                <Text style={styles.linkTexto}>
+                  Ya tienes cuenta? Inicia sesión
+                </Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -147,5 +154,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
+  },
+  link: {
+    width: 180,
+    height: 50,
+    alignSelf: "center",
+    padding: 5,
+  },
+  linkTexto: {
+    color: "#183d8a",
+    textAlign: "center",
   },
 });
