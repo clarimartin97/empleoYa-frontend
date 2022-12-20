@@ -57,7 +57,11 @@ export default function SignUp(props) {
           navegarAHome();
         } else {
           //error
-          alert("errorcin jaja");
+          if (datos.error === "usuario_ya_existe") {
+            alert("El usuario ya existe");
+          } else {
+            alert("Hubo un error");
+          }
         }
       });
   };
