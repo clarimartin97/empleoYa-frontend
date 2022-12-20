@@ -26,6 +26,7 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
     })
       .then((respuesta) => respuesta.json())
       .then((datos) => {
+        alert(`Te has postulado a ${trabajo.nombreDelPuesto} `);
         setTrabajo({
           ...trabajo,
           estaPostulado: datos.postulacion.trabajo == idTrabajo,

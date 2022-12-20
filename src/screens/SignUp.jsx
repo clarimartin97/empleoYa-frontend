@@ -36,8 +36,7 @@ export default function SignUp(props) {
   };
 
   const postData = async (nombre, apellido, mail, contrasena) => {
-    const usuariosUrl = `${urlBase}usuarios`;
-    console.log(usuariosUrl);
+    const usuariosUrl = `${urlBase}signup`;
     const response = await fetch(usuariosUrl, {
       method: "POST",
       headers: {
@@ -54,7 +53,7 @@ export default function SignUp(props) {
       .then((datos) => {
         if (!datos.error) {
           //loguear
-          storeData(datos._id, nombre, apellido, mail);
+          storeData(datos._doc._id, nombre, apellido, mail);
           navegarAHome();
         } else {
           //error
