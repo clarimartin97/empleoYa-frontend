@@ -2,18 +2,19 @@ import React from "react-native";
 import { urlBase } from "../helpers/constantes";
 import { View, Image, StyleSheet, Text, TextInput } from "react-native";
 import theme from "../theme.js";
-import StyledText from "../componentes/StyledText.jsx";
+import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 
 function MisPostulaciones(props) {
   const { navigation } = props;
+  const isFocused = useIsFocused();
   const [postulaciones, setPostulaciones] = useState([]);
   useEffect(() => {
     console.log("aloha");
-    getData();
-  }, []);
+    if (isFocused) getData();
+  }, [isFocused]);
 
   const getData = async () => {
     getId().then(async (idUsuario) => {

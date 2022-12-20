@@ -11,7 +11,7 @@ function ListaTrabajos({ trabajos, puedoPostularme, deleteItem }) {
     <View style={styles.container}>
       <FlatList
         data={trabajos}
-        // ItemSeparatorComponent={() => <Text></Text>}
+        ItemSeparatorComponent={() => <Text></Text>}
         keyExtractor={keyExtractor}
         renderItem={({ item: info }) => {
           return (

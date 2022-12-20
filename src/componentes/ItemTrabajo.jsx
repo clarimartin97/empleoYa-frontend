@@ -6,14 +6,18 @@ import BotonPostulaciones from "./BotonPostulaciones.jsx";
 import { urlBase } from "../helpers/constantes";
 import { useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
+import { useEffect } from "react";
+import { useIsFocused } from "@react-navigation/native";
 
 function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
   const [trabajo, setTrabajo] = useState({ ...item });
+  const isFocused = useIsFocused();
+  useEffect(() => {
+    if (isFocused) setTrabajo({ ...item });
+  }, [isFocused]);
 
   const postData = async (idUsuario, idTrabajo) => {
-    console.log(idUsuario);
     const trabajosUrl = `${urlBase}postulacion`;
-    console.log(trabajosUrl);
     const response = await fetch(trabajosUrl, {
       method: "POST",
       headers: {
@@ -35,7 +39,6 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
   };
   const deleteData = async (idPostulacion) => {
     const postulacionUrl = `${urlBase}postulacion/${idPostulacion}`;
-    console.log(postulacionUrl);
     fetch(postulacionUrl, {
       method: "DELETE",
       headers: {
@@ -47,6 +50,7 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
         deleteItem();
       });
   };
+
   if (puedoPostularme)
     return (
       <View key={trabajo._id} style={styles.container}>
@@ -67,7 +71,6 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
           onPress={() => {
             const idTrabajo = trabajo._id;
             getId().then((idUsuario) => {
-              console.log(idUsuario);
               postData(idUsuario, idTrabajo);
             });
           }}
@@ -93,7 +96,6 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
           style={styles.botoncin}
           onPress={() => {
             const idPostulacion = trabajo.idPostulacion;
-            console.log(idPostulacion);
             deleteData(idPostulacion);
           }}
         >

@@ -54,7 +54,9 @@ export const getMail = async () => {
 }
 export const clearAll = async () => {
     try {
+        console.log("cccclari")
         await AsyncStorage.clear()
+        console.log("chau")
     }
     catch (e) {
         console.log("error clear: " + e);
