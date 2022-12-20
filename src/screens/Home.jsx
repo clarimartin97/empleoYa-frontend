@@ -7,6 +7,7 @@ import { getId, getNombre } from "../helpers/AsyncStorageHelper.js";
 import Busqueda from "../componentes/Busqueda.jsx";
 import { useState, useEffect } from "react";
 import { urlBase } from "../helpers/constantes";
+import Footer from "../componentes/Footer.jsx";
 
 function HomeScreen(props) {
   const { navigation } = props;
@@ -44,6 +45,7 @@ function HomeScreen(props) {
     <View>
       <Busqueda onSearchPress={onSearchPress} />
       <ListaTrabajos trabajos={trabajos} puedoPostularme={true} />
+      <Footer />
     </View>
   );
 }

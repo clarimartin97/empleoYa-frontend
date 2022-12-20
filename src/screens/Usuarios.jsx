@@ -1,10 +1,17 @@
 import React from "react-native";
 import { urlBase } from "../helpers/constantes";
-import { View, Image, StyleSheet, Text, TextInput } from "react-native";
+import {
+  View,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  TextInput,
+} from "react-native";
 import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
-
+import Footer from "../componentes/Footer";
 function InfoUsuario(props) {
   const { navigation } = props;
 
@@ -31,6 +38,9 @@ function InfoUsuario(props) {
   return (
     <View style={styles.container}>
       <View>
+        <TouchableOpacity>
+          <Text>Editar</Text>
+        </TouchableOpacity>
         <Image
           style={styles.image}
           source={{
@@ -62,6 +72,7 @@ function InfoUsuario(props) {
         </StyledText>
         <TextInput style={styles.textInput} />
       </View>
+      <Footer />
     </View>
   );
 }

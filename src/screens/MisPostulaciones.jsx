@@ -6,7 +6,7 @@ import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
-
+import Footer from "../componentes/Footer";
 function MisPostulaciones(props) {
   const { navigation } = props;
   const isFocused = useIsFocused();
@@ -39,6 +39,7 @@ function MisPostulaciones(props) {
           getData();
         }}
       />
+      <Footer />
     </View>
   );
 }

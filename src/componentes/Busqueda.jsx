@@ -63,12 +63,6 @@ export default function Busqueda({ onSearchPress }) {
 }
 
 const styles = StyleSheet.create({
-  /*   error: {
-    color: "red",
-    fontSize: 13,
-    marginBottom: 20,
-    marginTop: -5,
-  }, */
   form: {
     padding: 20,
     paddingVertical: 40,
