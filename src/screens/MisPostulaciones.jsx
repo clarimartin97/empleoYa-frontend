@@ -12,7 +12,6 @@ function MisPostulaciones(props) {
   const isFocused = useIsFocused();
   const [postulaciones, setPostulaciones] = useState([]);
   useEffect(() => {
-    console.log("aloha");
     if (isFocused) getData();
   }, [isFocused]);
 

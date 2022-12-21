@@ -12,27 +12,32 @@ import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../componentes/Footer";
+import { getNombre, getApellido, getId } from "../helpers/AsyncStorageHelper";
+
 function InfoUsuario(props) {
   const { navigation } = props;
-
-  const navegarASignUp = () => {
-    navigation.navigate("SignIn");
-  };
-  const navegarALogIn = () => {
-    navigation.navigate("LogIn");
-  };
+  const [nombreCompleto, setNombreCompleto] = useState("");
+  const [usuario, setUsuario] = useState(null);
 
   useEffect(() => {
+    getNombre().then((n) => {
+      getApellido().then((a) => {
+        setNombreCompleto(`${n} ${a}`);
+      });
+    });
     getData();
   }, []);
 
   const getData = async () => {
-    // const usersUrl = `${urlBase}usuarios`;
-    // console.log(usersUrl);
-    // const response = await fetch(usersUrl);
-    // console.log("response: " + response);
-    // const data = await response.json();
-    // console.log("data: " + data);
+    getId().then(async (id) => {
+      const usersUrl = `${urlBase}usuarios/${id}`;
+      console.log(usersUrl);
+      const response = await fetch(usersUrl);
+      console.log("response: " + response);
+      const data = await response.json();
+      console.log(data);
+      setUsuario(data);
+    });
   };
 
   return (
@@ -50,7 +55,7 @@ function InfoUsuario(props) {
       </View>
       <View style={{ justifyContent: "center" }}>
         <StyledText align="center" fontWeight="bold">
-          Nombre: Clara Martin
+          {nombreCompleto}
         </StyledText>
         <StyledText style={styles.modalidad}>Diseñadora Digital</StyledText>
       </View>
