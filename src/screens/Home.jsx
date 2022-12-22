@@ -2,7 +2,7 @@ import React from "react-native";
 import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import { useIsFocused } from "@react-navigation/native";
-import { View } from "react-native";
+import { View, ActivityIndicator } from "react-native";
 import { getId, getNombre } from "../helpers/AsyncStorageHelper.js";
 import Busqueda from "../componentes/Busqueda.jsx";
 import { useState, useEffect } from "react";
@@ -42,7 +42,7 @@ function HomeScreen(props) {
     });
   };
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <Busqueda onSearchPress={onSearchPress} />
       <ListaTrabajos trabajos={trabajos} puedoPostularme={true} />
       <Footer />

@@ -3,20 +3,14 @@ import { View, StyleSheet, Image } from "react-native";
 import StyledText from "./StyledText";
 const Footer = () => {
   return (
-    <View
-      style={{
-        flexDirection: "column",
-        backgroundColor: "#183d8a",
-      }}
-    >
-      <View style={styles.container}>
-        <Image style={styles.image} source={require("../../assets/logo.png")} />
-      </View>
-
-      <View style={styles.footerText}>
-        {/*         <StyledText fontWeight="bold" fontSize="title">
-          Copyright @ Clara Martín 2022
-        </StyledText> */}
+    <View style={styles.container}>
+      <View style={styles.contentContainer}>
+        <View>
+          <Image
+            style={styles.image}
+            source={require("../../assets/logo.png")}
+          />
+        </View>
       </View>
     </View>
   );
@@ -24,15 +18,23 @@ const Footer = () => {
 
 const styles = StyleSheet.create({
   image: {
-    padding: 20,
     width: 48,
     height: 48,
   },
   container: {
-    alignSelf: "center",
+    flexDirection: "column",
+    backgroundColor: "#183d8a",
+    flex: 1,
+    justifyContent: "space-between",
+  },
+  contentContainer: {
+    flexDirection: "column",
+    alignContent: "center",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#183d8a",
   },
   footerText: {
-    height: 29,
     flexDirection: "row",
     justifyContent: "center",
   },

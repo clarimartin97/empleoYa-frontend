@@ -1,7 +1,7 @@
 import React from "react";
 import { View, StyleSheet, TouchableOpacity, Text } from "react-native";
 import StyledText from "./StyledText.jsx";
-import HeaderTrabajo from "./HeaderTrabajo.jsx";
+import FooterTrabajo from "./FooterTrabajo.jsx";
 import BotonPostulaciones from "./BotonPostulaciones.jsx";
 import { urlBase } from "../helpers/constantes";
 import { useState } from "react";
@@ -54,18 +54,25 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
   if (puedoPostularme)
     return (
       <View key={trabajo._id} style={styles.container}>
-        <HeaderTrabajo {...trabajo} />
-        <StyledText fontSize="subheading" fontWeight="bold">
+        <Text style={styles.nombreDelPuesto}>
           Nombre del puesto: {trabajo.nombreDelPuesto}
+        </Text>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Duracion: {trabajo.duracion}
         </StyledText>
-        <StyledText>Duracion: {trabajo.duracion}</StyledText>
-        <StyledText>Ubicacion: {trabajo.ubicacion}</StyledText>
-        <StyledText>Categoría: {trabajo.categoria}</StyledText>
-        <StyledText>Requisitos: {trabajo.requisitos}</StyledText>
-        <StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Ubicacion: {trabajo.ubicacion}
+        </StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Requisitos: {trabajo.requisitos}
+        </StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
           Descripción del puesto: {trabajo.descripcionDelPuesto}
         </StyledText>
-        <StyledText>Modalidad: {trabajo.modalidad}</StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Modalidad: {trabajo.modalidad}
+        </StyledText>
+        <FooterTrabajo {...trabajo} />
         <BotonPostulaciones
           habilitado={!trabajo.estaPostulado}
           onPress={() => {
@@ -80,18 +87,26 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
   else
     return (
       <View key={trabajo._id} style={styles.container}>
-        <HeaderTrabajo {...trabajo} />
-        <StyledText fontSize="subheading" fontWeight="bold">
+        <Text style={styles.nombreDelPuesto}>
           Nombre del puesto: {trabajo.nombreDelPuesto}
+        </Text>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Duracion: {trabajo.duracion}
         </StyledText>
-        <StyledText>Duracion: {trabajo.duracion}</StyledText>
-        <StyledText>Ubicacion: {trabajo.ubicacion}</StyledText>
-        <StyledText>Categoría: {trabajo.categoria}</StyledText>
-        <StyledText>Requisitos: {trabajo.requisitos}</StyledText>
-        <StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Ubicacion: {trabajo.ubicacion}
+        </StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Requisitos: {trabajo.requisitos}
+        </StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
           Descripción del puesto: {trabajo.descripcionDelPuesto}
         </StyledText>
-        <StyledText>Modalidad: {trabajo.modalidad}</StyledText>
+        <StyledText style={styles.estiloInformacion} fontWeight="bold">
+          Modalidad: {trabajo.modalidad}
+        </StyledText>
+        <FooterTrabajo {...trabajo} />
+
         <TouchableOpacity
           style={styles.botoncin}
           onPress={() => {
@@ -107,14 +122,14 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
 
 const styles = StyleSheet.create({
   container: {
+    backgroundColor: "#E3E6E4",
+    borderRadius: 8,
     padding: 20,
-    paddingBottom: 5,
-    paddingTop: 5,
+    margin: 20,
+    justifyContent: "center",
   },
-  strong: {
-    color: "#09f",
-    fontWeight: "bold",
-    marginBottom: 5,
+  estiloInformacion: {
+    padding: 2,
   },
   botoncin: {
     width: 180,
@@ -129,6 +144,11 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     alignSelf: "center",
+    fontWeight: "bold",
+  },
+  nombreDelPuesto: {
+    fontSize: 16,
+    fontFamily: "System",
     fontWeight: "bold",
   },
 });

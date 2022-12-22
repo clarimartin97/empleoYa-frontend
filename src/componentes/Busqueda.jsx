@@ -30,8 +30,6 @@ export default function Busqueda({ onSearchPress }) {
       initialValues={initialValues}
       onSubmit={({ ubicacion, nombreDelPuesto }) => {
         onSearchPress(ubicacion, nombreDelPuesto);
-
-        /*   postData(values.mail, values.contrasena); */
       }}
     >
       {({ handleSubmit }) => {

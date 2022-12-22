@@ -8,22 +8,22 @@ import {
   Text,
   TextInput,
 } from "react-native";
-import UsuariosEditables from "./UsuariosEditables.jsx";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../componentes/Footer";
 import { getNombre, getApellido, getId } from "../helpers/AsyncStorageHelper";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-function InfoUsuario(props) {
+function UsuariosEditables(props) {
   const { navigation } = props;
   const [nombreCompleto, setNombreCompleto] = useState("");
   const [usuario, setUsuario] = useState(null);
 
-  const navegarAUsuariosEditables = () => {
-    navigation.navigate("UsuariosEditables");
+  const navegarAlUsuarioModificado = () => {
+    navigation.navigate("Usuario");
   };
+
   useEffect(() => {
     getNombre().then((n) => {
       getApellido().then((a) => {
@@ -49,11 +49,6 @@ function InfoUsuario(props) {
     <View style={styles.container}>
       <View style={styles.contentContainer}>
         <View>
-          <TouchableOpacity onPress={navegarAUsuariosEditables}>
-            <Text style={styles.iconoLapiz}>
-              <MaterialCommunityIcons name="pencil" size={28} color="#000" />
-            </Text>
-          </TouchableOpacity>
           <Image
             style={styles.image}
             source={{
@@ -65,16 +60,21 @@ function InfoUsuario(props) {
           <StyledText align="center" fontWeight="bold">
             {nombreCompleto}
           </StyledText>
-          <StyledText style={styles.titulo}>Diseñadora Digital</StyledText>
+          <StyledText style={styles.modalidad}>Diseñadora Digital</StyledText>
         </View>
         <View>
           <StyledText style={styles.title} fontWeight="bold">
             Formacion:
           </StyledText>
           <View style={{ flexDirection: "row" }}>
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInput} />
+            <TextInput style={styles.textInputDate} />
+            <TextInput style={styles.textInputDate} />
+            <TextInput style={styles.textInput} />
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={28}
+              color="#FF0000"
+            />
           </View>
         </View>
         <View>
@@ -82,9 +82,14 @@ function InfoUsuario(props) {
             Experiencia:
           </StyledText>
           <View style={{ flexDirection: "row" }}>
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInput} />
+            <TextInput style={styles.textInputDate} />
+            <TextInput style={styles.textInputDate} />
+            <TextInput style={styles.textInput} />
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={28}
+              color="#FF0000"
+            />
           </View>
         </View>
 
@@ -92,8 +97,22 @@ function InfoUsuario(props) {
           <StyledText style={styles.title} fontWeight="bold">
             Habilidades:
           </StyledText>
-          <TextInput editable="false" style={styles.textInput} />
+          <View style={{ flexDirection: "row" }}>
+            <TextInput style={styles.textInput} />
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={28}
+              color="#FF0000"
+            />
+          </View>
         </View>
+
+        <TouchableOpacity
+          style={styles.botoncin}
+          onPress={navegarAlUsuarioModificado}
+        >
+          <Text style={styles.textoBotoncin}>Guardar</Text>
+        </TouchableOpacity>
       </View>
       <Footer />
     </View>
@@ -114,19 +133,33 @@ const styles = StyleSheet.create({
     height: 80,
     borderRadius: 4,
     alignSelf: "center",
-    margin: 5,
+    margin: 10,
+  },
+  botoncin: {
+    width: 180,
+    height: 50,
+    backgroundColor: "#183d8a",
+    borderRadius: 8,
+    alignSelf: "center",
+    padding: 5,
+    justifyContent: "center",
+    margin: 30,
+  },
+  textoBotoncin: {
+    color: "white",
+    fontSize: 16,
+    alignSelf: "center",
+    fontWeight: "bold",
   },
   title: {
     padding: 10,
     marginLeft: 5,
   },
-  titulo: {
-    textAlign: "center",
-  },
   textInput: {
     width: "50%",
-    borderBottomColor: "grey",
-    borderBottomWidth: 2,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#999",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBottom: 10,
@@ -134,8 +167,9 @@ const styles = StyleSheet.create({
   },
   textInputDate: {
     width: "20%",
-    borderBottomColor: "grey",
-    borderBottomWidth: 2,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#999",
     paddingHorizontal: 20,
     paddingVertical: 10,
     marginBottom: 10,
@@ -147,4 +181,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default InfoUsuario;
+export default UsuariosEditables;

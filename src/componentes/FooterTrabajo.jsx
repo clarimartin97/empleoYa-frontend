@@ -3,31 +3,15 @@ import { Image, View, StyleSheet } from "react-native";
 import StyledText from "./StyledText.jsx";
 import theme from "../theme.js";
 
-const HeaderTrabajo = ({
-  logo,
-  nombreDeLaEmpresa,
-  modalidad,
-  fechaDePublicacion,
-}) => {
+const HeaderTrabajo = ({ fechaDePublicacion }) => {
   return (
     <View
       style={{
         flexDirection: "row",
         justifyContent: "space-around",
-        paddingBottom: 2,
+        paddingBottom: 12,
       }}
     >
-      <View>
-        <Image style={styles.image} source={{ uri: logo }} />
-      </View>
-      <View style={{ justifyContent: "center" }}>
-        <StyledText align="center" fontWeight="bold">
-          {nombreDeLaEmpresa}
-        </StyledText>
-        <StyledText align="center" style={styles.modalidad}>
-          {modalidad}
-        </StyledText>
-      </View>
       <View>
         <StyledText color="secondary" align="center">
           Fecha de publicación:{" "}

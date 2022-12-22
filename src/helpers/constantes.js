@@ -1,1 +1,1 @@
-export const urlBase = "http://192.168.1.8:8000/";
+export const urlBase = "http://192.168.1.6:8000/";

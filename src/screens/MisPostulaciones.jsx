@@ -1,6 +1,6 @@
 import React from "react-native";
 import { urlBase } from "../helpers/constantes";
-import { View, Image, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, TextInput } from "react-native";
 import theme from "../theme.js";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
@@ -28,16 +28,19 @@ function MisPostulaciones(props) {
   console.log(postulaciones);
 
   return (
-    <View style={styles.container}>
-      <ListaTrabajos
-        trabajos={postulaciones.map((e) => {
-          return { ...e.trabajo, idPostulacion: e._id };
-        })}
-        puedoPostularme={false}
-        deleteItem={() => {
-          getData();
-        }}
-      />
+    <View style={{ flex: 1 }}>
+      <Text style={styles.titulo}>Lista de postulaciones</Text>
+      <View style={styles.container}>
+        <ListaTrabajos
+          trabajos={postulaciones.map((e) => {
+            return { ...e.trabajo, idPostulacion: e._id };
+          })}
+          puedoPostularme={false}
+          deleteItem={() => {
+            getData();
+          }}
+        />
+      </View>
       <Footer />
     </View>
   );
@@ -46,21 +49,6 @@ function MisPostulaciones(props) {
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
-  },
-  modalidad: {
-    padding: 3,
-    color: theme.colors.primary,
-    alignSelf: "center",
-    borderRadius: 4,
-    overflow: "hidden",
-    padding: 10,
-  },
-  image: {
-    width: 80,
-    height: 80,
-    borderRadius: 4,
-    alignSelf: "center",
-    margin: 20,
   },
   title: {
     padding: 10,
@@ -74,6 +62,13 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginBottom: 10,
     margin: 5,
+  },
+  titulo: {
+    fontSize: 18,
+    fontWeight: "bold",
+    alignContent: "center",
+    textAlign: "center",
+    padding: 15,
   },
 });
 

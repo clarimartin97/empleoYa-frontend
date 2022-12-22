@@ -11,6 +11,7 @@ import "react-native-gesture-handler";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import MisPostulaciones from "./screens/MisPostulaciones.jsx";
 import LogOut from "./screens/LogOut.jsx";
+import UsuariosEditables from "./screens/UsuariosEditables.jsx";
 
 const Menu = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -77,6 +78,16 @@ const Main = () => {
           component={SplashScreen}
           options={{
             headerShown: false,
+            drawerItemStyle: {
+              display: "none",
+            },
+          }}
+        />
+        <Menu.Screen
+          name="UsuariosEditables"
+          component={UsuariosEditables}
+          options={{
+            title: "Editar usuario",
             drawerItemStyle: {
               display: "none",
             },
