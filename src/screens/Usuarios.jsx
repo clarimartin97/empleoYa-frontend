@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  ScrollView,
 } from "react-native";
 import UsuariosEditables from "./UsuariosEditables.jsx";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -15,23 +16,27 @@ import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../componentes/Footer";
 import { getNombre, getApellido, getId } from "../helpers/AsyncStorageHelper";
+import { useIsFocused } from "@react-navigation/native";
 
 function InfoUsuario(props) {
   const { navigation } = props;
   const [nombreCompleto, setNombreCompleto] = useState("");
   const [usuario, setUsuario] = useState(null);
+  const isFocused = useIsFocused();
 
   const navegarAUsuariosEditables = () => {
     navigation.navigate("UsuariosEditables");
   };
   useEffect(() => {
-    getNombre().then((n) => {
-      getApellido().then((a) => {
-        setNombreCompleto(`${n} ${a}`);
+    if (isFocused) {
+      getNombre().then((n) => {
+        getApellido().then((a) => {
+          setNombreCompleto(`${n} ${a}`);
+        });
       });
-    });
-    getData();
-  }, []);
+      getData();
+    }
+  }, [isFocused]);
 
   const getData = async () => {
     getId().then(async (id) => {
@@ -45,8 +50,32 @@ function InfoUsuario(props) {
     });
   };
 
+  function listaFormaciones() {
+    if (usuario)
+      return usuario.formaciones.map((data) => {
+        return (
+          <View style={{ flexDirection: "row" }}>
+            <Text>{data.fechaInicio}</Text>
+            <Text>{data.fechaFin}</Text>
+            <Text>{data.institucion}</Text>
+          </View>
+        );
+      });
+  }
+
+  function listaHabilidades() {
+    if (usuario)
+      return usuario.habilidades.map((habilidad) => {
+        return (
+          <View key={habilidad} style={{ flexDirection: "row" }}>
+            <Text>{habilidad}</Text>
+          </View>
+        );
+      });
+  }
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
         <View>
           <TouchableOpacity onPress={navegarAUsuariosEditables}>
@@ -71,32 +100,18 @@ function InfoUsuario(props) {
           <StyledText style={styles.title} fontWeight="bold">
             Formacion:
           </StyledText>
-          <View style={{ flexDirection: "row" }}>
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInput} />
-          </View>
-        </View>
-        <View>
-          <StyledText style={styles.title} fontWeight="bold">
-            Experiencia:
-          </StyledText>
-          <View style={{ flexDirection: "row" }}>
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInputDate} />
-            <TextInput editable="false" style={styles.textInput} />
-          </View>
+          {listaFormaciones()}
         </View>
 
         <View>
           <StyledText style={styles.title} fontWeight="bold">
             Habilidades:
           </StyledText>
-          <TextInput editable="false" style={styles.textInput} />
+          {listaHabilidades()}
         </View>
       </View>
       <Footer />
-    </View>
+    </ScrollView>
   );
 }
 

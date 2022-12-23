@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   Text,
   TextInput,
+  ScrollView,
 } from "react-native";
 import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
@@ -19,9 +20,31 @@ function UsuariosEditables(props) {
   const { navigation } = props;
   const [nombreCompleto, setNombreCompleto] = useState("");
   const [usuario, setUsuario] = useState(null);
+  const [habilidadesText, setHabilidadesText] = useState("");
 
-  const navegarAlUsuarioModificado = () => {
-    navigation.navigate("Usuario");
+  const actualizarHabilidades = async (nuevasHabilidades) => {
+    getId().then(async (id) => {
+      const usuarioUrl = `${urlBase}usuario/${id}`;
+      const response = await fetch(usuarioUrl, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          habilidades: nuevasHabilidades,
+        }),
+      })
+        .then((respuesta) => respuesta.json())
+        .then((datos) => {
+          setHabilidadesText("");
+          console.log(datos);
+          if (datos.err) {
+            alert("Hubo un error");
+          } else {
+            setUsuario(datos.usuario);
+          }
+        });
+    });
   };
 
   useEffect(() => {
@@ -36,17 +59,39 @@ function UsuariosEditables(props) {
   const getData = async () => {
     getId().then(async (id) => {
       const usersUrl = `${urlBase}usuarios/${id}`;
-      console.log(usersUrl);
       const response = await fetch(usersUrl);
-      console.log("response: " + response);
       const data = await response.json();
-      console.log(data);
       setUsuario(data);
     });
   };
 
+  function renderListaHabilidades() {
+    if (usuario) {
+      return usuario.habilidades.map((habilidad) => {
+        return (
+          <View key={habilidad} /* style={{ flexDirection: "row" } }*/>
+            <Text>{habilidad}</Text>
+
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={28}
+              color="#FF0000"
+              onPress={() => {
+                const nuevaLista = usuario.habilidades.filter(
+                  (x) => x != habilidad
+                );
+                console.log(nuevaLista);
+                actualizarHabilidades(nuevaLista);
+              }}
+            />
+          </View>
+        );
+      });
+    }
+  }
+
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
         <View>
           <Image
@@ -77,45 +122,31 @@ function UsuariosEditables(props) {
             />
           </View>
         </View>
-        <View>
-          <StyledText style={styles.title} fontWeight="bold">
-            Experiencia:
-          </StyledText>
-          <View style={{ flexDirection: "row" }}>
-            <TextInput style={styles.textInputDate} />
-            <TextInput style={styles.textInputDate} />
-            <TextInput style={styles.textInput} />
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={28}
-              color="#FF0000"
-            />
-          </View>
-        </View>
 
         <View>
           <StyledText style={styles.title} fontWeight="bold">
             Habilidades:
           </StyledText>
-          <View style={{ flexDirection: "row" }}>
-            <TextInput style={styles.textInput} />
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={28}
-              color="#FF0000"
-            />
-          </View>
+          {renderListaHabilidades()}
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(newText) => setHabilidadesText(newText)}
+            defaultValue={habilidadesText}
+          />
         </View>
 
         <TouchableOpacity
           style={styles.botoncin}
-          onPress={navegarAlUsuarioModificado}
+          onPress={() => {
+            if (habilidadesText !== "")
+              actualizarHabilidades([...usuario.habilidades, habilidadesText]);
+          }}
         >
           <Text style={styles.textoBotoncin}>Guardar</Text>
         </TouchableOpacity>
       </View>
       <Footer />
-    </View>
+    </ScrollView>
   );
 }
 
