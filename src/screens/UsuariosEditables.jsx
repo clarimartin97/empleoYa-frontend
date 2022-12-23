@@ -16,15 +16,24 @@ import Footer from "../componentes/Footer";
 import { getNombre, getApellido, getId } from "../helpers/AsyncStorageHelper";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
+const formacionesInitialValues = {
+  fechaInicio: "",
+  fechaFin: "",
+  institucion: "",
+};
+
 function UsuariosEditables(props) {
   const { navigation } = props;
   const [nombreCompleto, setNombreCompleto] = useState("");
   const [usuario, setUsuario] = useState(null);
   const [habilidadesText, setHabilidadesText] = useState("");
+  const [formacionesText, setFormacionesText] = useState(
+    formacionesInitialValues
+  );
 
   const actualizarHabilidades = async (nuevasHabilidades) => {
     getId().then(async (id) => {
-      const usuarioUrl = `${urlBase}usuario/${id}`;
+      const usuarioUrl = `${urlBase}habilidades/${id}`;
       const response = await fetch(usuarioUrl, {
         method: "PATCH",
         headers: {
@@ -37,6 +46,50 @@ function UsuariosEditables(props) {
         .then((respuesta) => respuesta.json())
         .then((datos) => {
           setHabilidadesText("");
+          console.log(datos);
+          if (datos.err) {
+            alert("Hubo un error");
+          } else {
+            setUsuario(datos.usuario);
+          }
+        });
+    });
+  };
+  const agregarFormacion = async (formacion) => {
+    getId().then(async (id) => {
+      const usuarioUrl = `${urlBase}formaciones/${id}`;
+      const response = await fetch(usuarioUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          formacion: formacion,
+        }),
+      })
+        .then((respuesta) => respuesta.json())
+        .then((datos) => {
+          setFormacionesText(formacionesInitialValues);
+          console.log(datos);
+          if (datos.err) {
+            alert("Hubo un error");
+          } else {
+            setUsuario(datos.usuario);
+          }
+        });
+    });
+  };
+  const borrarFormaciones = async (idFormacion) => {
+    getId().then(async (idUsuario) => {
+      const usuarioUrl = `${urlBase}formaciones/${idFormacion}/${idUsuario}`;
+      const response = await fetch(usuarioUrl, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+        .then((respuesta) => respuesta.json())
+        .then((datos) => {
           console.log(datos);
           if (datos.err) {
             alert("Hubo un error");
@@ -67,6 +120,7 @@ function UsuariosEditables(props) {
 
   function renderListaHabilidades() {
     if (usuario) {
+      console.log(usuario.habilidades);
       return usuario.habilidades.map((habilidad) => {
         return (
           <View key={habilidad} /* style={{ flexDirection: "row" } }*/>
@@ -82,6 +136,30 @@ function UsuariosEditables(props) {
                 );
                 console.log(nuevaLista);
                 actualizarHabilidades(nuevaLista);
+              }}
+            />
+          </View>
+        );
+      });
+    }
+  }
+  function renderListaFormaciones() {
+    if (usuario) {
+      console.log(usuario);
+      return usuario.formaciones.map((formacion) => {
+        return (
+          <View key={formacion._id} /* style={{ flexDirection: "row" } }*/>
+            <Text>{formacion.fechaInicio}</Text>
+            <Text>{formacion.fechaFin}</Text>
+            <Text>{formacion.institucion}</Text>
+
+            <MaterialCommunityIcons
+              name="delete-outline"
+              size={28}
+              color="#FF0000"
+              onPress={() => {
+                const idFormacion = formacion._id;
+                borrarFormaciones(idFormacion);
               }}
             />
           </View>
@@ -111,16 +189,29 @@ function UsuariosEditables(props) {
           <StyledText style={styles.title} fontWeight="bold">
             Formacion:
           </StyledText>
-          <View style={{ flexDirection: "row" }}>
-            <TextInput style={styles.textInputDate} />
-            <TextInput style={styles.textInputDate} />
-            <TextInput style={styles.textInput} />
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={28}
-              color="#FF0000"
-            />
-          </View>
+          {renderListaFormaciones()}
+
+          <TextInput
+            style={styles.textInputDate}
+            onChangeText={(newText) =>
+              setFormacionesText({ ...formacionesText, fechaInicio: newText })
+            }
+            defaultValue={formacionesText.fechaInicio}
+          />
+          <TextInput
+            style={styles.textInputDate}
+            onChangeText={(newText) =>
+              setFormacionesText({ ...formacionesText, fechaFin: newText })
+            }
+            defaultValue={formacionesText.fechaFin}
+          />
+          <TextInput
+            style={styles.textInput}
+            onChangeText={(newText) =>
+              setFormacionesText({ ...formacionesText, institucion: newText })
+            }
+            defaultValue={formacionesText.institucion}
+          />
         </View>
 
         <View>
@@ -138,6 +229,12 @@ function UsuariosEditables(props) {
         <TouchableOpacity
           style={styles.botoncin}
           onPress={() => {
+            if (
+              formacionesText.fechaInicio !== "" &&
+              formacionesText.fechaFin !== "" &&
+              formacionesText.institucion !== ""
+            )
+              agregarFormacion(formacionesText);
             if (habilidadesText !== "")
               actualizarHabilidades([...usuario.habilidades, habilidadesText]);
           }}
