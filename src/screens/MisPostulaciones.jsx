@@ -24,7 +24,6 @@ function MisPostulaciones(props) {
       setPostulaciones(data);
     });
   };
-  console.log("---");
   console.log(postulaciones);
 
   return (

@@ -12,6 +12,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import MisPostulaciones from "./screens/MisPostulaciones.jsx";
 import LogOut from "./screens/LogOut.jsx";
 import UsuariosEditables from "./screens/UsuariosEditables.jsx";
+import NoHayPostulaciones from "./componentes/NoHayPostulaciones.jsx";
 
 const Menu = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -41,6 +42,13 @@ const Main = () => {
             title: "Mi Usuario",
           }}
           component={InfoUsuario}
+        />
+        <Menu.Screen
+          name="NoHayPostulaciones"
+          options={{
+            title: "Mis postulaciones",
+          }}
+          component={NoHayPostulaciones}
         />
         <Menu.Screen
           name="SignUp"

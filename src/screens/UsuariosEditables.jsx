@@ -30,6 +30,9 @@ function UsuariosEditables(props) {
   const [formacionesText, setFormacionesText] = useState(
     formacionesInitialValues
   );
+  const navegarAUsuario = () => {
+    navigation.navigate("Usuario");
+  };
 
   const actualizarHabilidades = async (nuevasHabilidades) => {
     getId().then(async (id) => {
@@ -123,13 +126,13 @@ function UsuariosEditables(props) {
       console.log(usuario.habilidades);
       return usuario.habilidades.map((habilidad) => {
         return (
-          <View key={habilidad} /* style={{ flexDirection: "row" } }*/>
-            <Text>{habilidad}</Text>
+          <View key={habilidad} style={styles.agregarHabilidad}>
+            <Text style={styles.habilidadAgregada}>{habilidad}</Text>
 
             <MaterialCommunityIcons
               name="delete-outline"
               size={28}
-              color="#FF0000"
+              color="#e32a1e"
               onPress={() => {
                 const nuevaLista = usuario.habilidades.filter(
                   (x) => x != habilidad
@@ -148,20 +151,23 @@ function UsuariosEditables(props) {
       console.log(usuario);
       return usuario.formaciones.map((formacion) => {
         return (
-          <View key={formacion._id} /* style={{ flexDirection: "row" } }*/>
-            <Text>{formacion.fechaInicio}</Text>
-            <Text>{formacion.fechaFin}</Text>
-            <Text>{formacion.institucion}</Text>
-
-            <MaterialCommunityIcons
-              name="delete-outline"
-              size={28}
-              color="#FF0000"
-              onPress={() => {
-                const idFormacion = formacion._id;
-                borrarFormaciones(idFormacion);
-              }}
-            />
+          <View key={formacion._id} style={styles.info}>
+            <View>
+              <Text>Fecha inicio: {formacion.fechaInicio}</Text>
+              <Text>Fecha fin:{formacion.fechaFin}</Text>
+              <Text>Nombre de la institucion: {formacion.institucion}</Text>
+            </View>
+            <View>
+              <MaterialCommunityIcons
+                name="delete-outline"
+                size={28}
+                color="#e32a1e"
+                onPress={() => {
+                  const idFormacion = formacion._id;
+                  borrarFormaciones(idFormacion);
+                }}
+              />
+            </View>
           </View>
         );
       });
@@ -171,6 +177,9 @@ function UsuariosEditables(props) {
   return (
     <ScrollView style={styles.container}>
       <View style={styles.contentContainer}>
+        <TouchableOpacity onPress={navegarAUsuario}>
+          <Text style={{ color: "#183d8a" }}>Volver</Text>
+        </TouchableOpacity>
         <View>
           <Image
             style={styles.image}
@@ -183,15 +192,16 @@ function UsuariosEditables(props) {
           <StyledText align="center" fontWeight="bold">
             {nombreCompleto}
           </StyledText>
-          <StyledText style={styles.modalidad}>Diseñadora Digital</StyledText>
         </View>
         <View>
           <StyledText style={styles.title} fontWeight="bold">
             Formacion:
           </StyledText>
-          {renderListaFormaciones()}
-
+        </View>
+        {renderListaFormaciones()}
+        <View style={styles.flexDirectionRow}>
           <TextInput
+            placeholder="Fecha de inicio"
             style={styles.textInputDate}
             onChangeText={(newText) =>
               setFormacionesText({ ...formacionesText, fechaInicio: newText })
@@ -199,13 +209,17 @@ function UsuariosEditables(props) {
             defaultValue={formacionesText.fechaInicio}
           />
           <TextInput
+            placeholder="Fecha de fin"
             style={styles.textInputDate}
             onChangeText={(newText) =>
               setFormacionesText({ ...formacionesText, fechaFin: newText })
             }
             defaultValue={formacionesText.fechaFin}
           />
+        </View>
+        <View>
           <TextInput
+            placeholder="Nombre de la institución"
             style={styles.textInput}
             onChangeText={(newText) =>
               setFormacionesText({ ...formacionesText, institucion: newText })
@@ -218,8 +232,11 @@ function UsuariosEditables(props) {
           <StyledText style={styles.title} fontWeight="bold">
             Habilidades:
           </StyledText>
-          {renderListaHabilidades()}
+          <View style={styles.flexDirectionRow}>
+            {renderListaHabilidades()}
+          </View>
           <TextInput
+            placeholder="Agregar habilidad"
             style={styles.textInput}
             onChangeText={(newText) => setHabilidadesText(newText)}
             defaultValue={habilidadesText}
@@ -284,7 +301,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   textInput: {
-    width: "50%",
+    width: "70%",
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#999",
@@ -294,7 +311,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   textInputDate: {
-    width: "20%",
+    width: "45%",
     borderRadius: 5,
     borderWidth: 1,
     borderColor: "#999",
@@ -306,6 +323,23 @@ const styles = StyleSheet.create({
   iconoLapiz: {
     alignSelf: "flex-end",
     padding: 5,
+  },
+  flexDirectionRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+  },
+  habilidadAgregada: {
+    padding: 5,
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  agregarHabilidad: {
+    alignContent: "center",
+    alignSelf: "center",
+  },
+  info: {
+    flexDirection: "row",
+    padding: 3,
   },
 });
 

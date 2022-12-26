@@ -11,7 +11,9 @@ const BotonPostulaciones = ({ habilitado, onPress }) => {
   else
     return (
       <TouchableOpacity style={styles.deshabilitado}>
-        <Text style={styles.textoBotoncin}>Postularme</Text>
+        <Text style={styles.textoBotoncinDeshabilitado}>
+          Ya te postulaste a este trabajo
+        </Text>
       </TouchableOpacity>
     );
 };
@@ -28,10 +30,6 @@ const styles = StyleSheet.create({
   },
 
   deshabilitado: {
-    width: 120,
-    height: 40,
-    backgroundColor: "#9B9999",
-    borderRadius: 8,
     alignSelf: "center",
     padding: 5,
     justifyContent: "center",
@@ -40,6 +38,12 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 14,
     alignSelf: "center",
+    fontWeight: "bold",
+  },
+  textoBotoncinDeshabilitado: {
+    color: "#9B9999",
+    fontSize: 14,
+    alignSelf: "start",
     fontWeight: "bold",
   },
 });

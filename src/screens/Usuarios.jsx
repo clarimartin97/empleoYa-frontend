@@ -11,7 +11,6 @@ import {
 } from "react-native";
 import UsuariosEditables from "./UsuariosEditables.jsx";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../componentes/Footer";
@@ -54,10 +53,16 @@ function InfoUsuario(props) {
     if (usuario)
       return usuario.formaciones.map((data) => {
         return (
-          <View style={{ flexDirection: "row" }}>
-            <Text>{data.fechaInicio}</Text>
-            <Text>{data.fechaFin}</Text>
-            <Text>{data.institucion}</Text>
+          <View style={styles.formacionUsuario}>
+            <View>
+              <Text>Fecha de inicio: {data.fechaInicio}</Text>
+            </View>
+            <View>
+              <Text>Fecha de finalización: {data.fechaFin}</Text>
+            </View>
+            <View>
+              <Text>Institución: {data.institucion}</Text>
+            </View>
           </View>
         );
       });
@@ -67,8 +72,8 @@ function InfoUsuario(props) {
     if (usuario)
       return usuario.habilidades.map((habilidad) => {
         return (
-          <View key={habilidad} style={{ flexDirection: "row" }}>
-            <Text>{habilidad}</Text>
+          <View key={habilidad} style={styles.formacionUsuario}>
+            <Text> ☛ {habilidad}</Text>
           </View>
         );
       });
@@ -80,7 +85,7 @@ function InfoUsuario(props) {
         <View>
           <TouchableOpacity onPress={navegarAUsuariosEditables}>
             <Text style={styles.iconoLapiz}>
-              <MaterialCommunityIcons name="pencil" size={28} color="#000" />
+              <MaterialCommunityIcons name="pencil" size={28} color="#183d8a" />
             </Text>
           </TouchableOpacity>
           <Image
@@ -94,7 +99,6 @@ function InfoUsuario(props) {
           <StyledText align="center" fontWeight="bold">
             {nombreCompleto}
           </StyledText>
-          <StyledText style={styles.titulo}>Diseñadora Digital</StyledText>
         </View>
         <View>
           <StyledText style={styles.title} fontWeight="bold">
@@ -134,10 +138,9 @@ const styles = StyleSheet.create({
   title: {
     padding: 10,
     marginLeft: 5,
+    color: "#183d8a",
   },
-  titulo: {
-    textAlign: "center",
-  },
+
   textInput: {
     width: "50%",
     borderBottomColor: "grey",
@@ -159,6 +162,13 @@ const styles = StyleSheet.create({
   iconoLapiz: {
     alignSelf: "flex-end",
     padding: 5,
+  },
+  formacionUsuario: {
+    flexDirection: "column",
+    padding: 5,
+    paddingBottom: 3,
+    backgroundColor: "#E3E6E4",
+    borderRadius: 8,
   },
 });
 
