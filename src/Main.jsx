@@ -43,13 +43,7 @@ const Main = () => {
           }}
           component={InfoUsuario}
         />
-        <Menu.Screen
-          name="NoHayPostulaciones"
-          options={{
-            title: "Mis postulaciones",
-          }}
-          component={NoHayPostulaciones}
-        />
+
         <Menu.Screen
           name="SignUp"
           options={{

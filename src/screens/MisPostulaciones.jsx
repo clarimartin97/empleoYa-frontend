@@ -1,12 +1,13 @@
 import React from "react-native";
 import { urlBase } from "../helpers/constantes";
-import { View, StyleSheet, Text, TextInput } from "react-native";
+import { View, StyleSheet, Text, Image } from "react-native";
 import theme from "../theme.js";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import Footer from "../componentes/Footer";
+import NoHayPostulaciones from "../componentes/NoHayPostulaciones.jsx";
 function MisPostulaciones(props) {
   const { navigation } = props;
   const isFocused = useIsFocused();
@@ -25,24 +26,32 @@ function MisPostulaciones(props) {
     });
   };
   console.log(postulaciones);
-
-  return (
-    <View style={{ flex: 1 }}>
-      <Text style={styles.titulo}>Lista de postulaciones</Text>
-      <View style={styles.container}>
-        <ListaTrabajos
-          trabajos={postulaciones.map((e) => {
-            return { ...e.trabajo, idPostulacion: e._id };
-          })}
-          puedoPostularme={false}
-          deleteItem={() => {
-            getData();
-          }}
-        />
+  if (postulaciones.length > 0) {
+    return (
+      <View style={{ flex: 1 }}>
+        <Text style={styles.titulo}>Lista de postulaciones</Text>
+        <View style={styles.container}>
+          <ListaTrabajos
+            trabajos={postulaciones.map((e) => {
+              return { ...e.trabajo, idPostulacion: e._id };
+            })}
+            puedoPostularme={false}
+            deleteItem={() => {
+              getData();
+            }}
+          />
+        </View>
+        <Footer />
       </View>
-      <Footer />
-    </View>
-  );
+    );
+  } else {
+    return (
+      <View>
+        <NoHayPostulaciones />
+        <Footer />
+      </View>
+    );
+  }
 }
 
 const styles = StyleSheet.create({
@@ -68,6 +77,24 @@ const styles = StyleSheet.create({
     alignContent: "center",
     textAlign: "center",
     padding: 15,
+  },
+
+  image: {
+    width: 350,
+    height: 350,
+    alignSelf: "center",
+    borderRadius: 8,
+    padding: 10,
+    margin: 5,
+  },
+  noPostulaciones: {
+    padding: 20,
+  },
+  textoPostulacion: {
+    fontWeight: "bold",
+    fontSize: 18,
+    textAlign: "center",
+    color: "#999",
   },
 });
 

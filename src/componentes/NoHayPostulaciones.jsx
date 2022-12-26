@@ -1,9 +1,7 @@
 import React from "react-native";
 import { View, Image, StyleSheet, Text } from "react-native";
 
-function NoHayPostulaciones(props) {
-  const { navigation } = props;
-
+function NoHayPostulaciones() {
   return (
     <View style={styles.noPostulaciones}>
       <Image
