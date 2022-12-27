@@ -5,7 +5,6 @@ const MAIL_USUARIO_KEY = "mail_usuario";
 const ID_USUARIO_KEY = "id_usuario";
 
 export const storeData = async (id, nombre, apellido, mail) => {
-    console.log(id)
     try {
         await AsyncStorage.setItem(ID_USUARIO_KEY, id);
         await AsyncStorage.setItem(NOMBRE_USUARIO_KEY, nombre);
@@ -54,9 +53,7 @@ export const getMail = async () => {
 }
 export const clearAll = async () => {
     try {
-        console.log("cccclari")
         await AsyncStorage.clear()
-        console.log("chau")
     }
     catch (e) {
         console.log("error clear: " + e);

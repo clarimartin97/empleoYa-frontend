@@ -9,7 +9,6 @@ import {
   TextInput,
   ScrollView,
 } from "react-native";
-import theme from "../theme.js";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
 import Footer from "../componentes/Footer";
@@ -49,7 +48,6 @@ function UsuariosEditables(props) {
         .then((respuesta) => respuesta.json())
         .then((datos) => {
           setHabilidadesText("");
-          console.log(datos);
           if (datos.err) {
             alert("Hubo un error");
           } else {
@@ -73,7 +71,6 @@ function UsuariosEditables(props) {
         .then((respuesta) => respuesta.json())
         .then((datos) => {
           setFormacionesText(formacionesInitialValues);
-          console.log(datos);
           if (datos.err) {
             alert("Hubo un error");
           } else {
@@ -93,7 +90,6 @@ function UsuariosEditables(props) {
       })
         .then((respuesta) => respuesta.json())
         .then((datos) => {
-          console.log(datos);
           if (datos.err) {
             alert("Hubo un error");
           } else {
@@ -123,7 +119,6 @@ function UsuariosEditables(props) {
 
   function renderListaHabilidades() {
     if (usuario) {
-      console.log(usuario.habilidades);
       return usuario.habilidades.map((habilidad) => {
         return (
           <View key={habilidad} style={styles.agregarHabilidad}>
@@ -137,7 +132,6 @@ function UsuariosEditables(props) {
                 const nuevaLista = usuario.habilidades.filter(
                   (x) => x != habilidad
                 );
-                console.log(nuevaLista);
                 actualizarHabilidades(nuevaLista);
               }}
             />
@@ -148,7 +142,6 @@ function UsuariosEditables(props) {
   }
   function renderListaFormaciones() {
     if (usuario) {
-      console.log(usuario);
       return usuario.formaciones.map((formacion) => {
         return (
           <View key={formacion._id} style={styles.info}>

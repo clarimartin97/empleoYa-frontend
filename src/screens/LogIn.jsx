@@ -41,7 +41,6 @@ export default function LogInScreen(props) {
 
   const postData = async (mail, contrasena) => {
     const loginUrl = `${urlBase}login`;
-    console.log(loginUrl);
     const response = await fetch(loginUrl, {
       method: "POST",
       headers: {
@@ -55,12 +54,9 @@ export default function LogInScreen(props) {
       .then((respuesta) => respuesta.json())
       .then((datos) => {
         if (!datos.error) {
-          //loguear
-          console.log(datos);
           storeData(datos._id, datos.nombre, datos.apellido, datos.mail);
           navegarAHome();
         } else {
-          //error
           alert("E-mail o contraseña incorrecto");
         }
       });
@@ -70,9 +66,9 @@ export default function LogInScreen(props) {
     <Formik
       validationSchema={logInValidationSchema}
       initialValues={initialValues}
-      onSubmit={(values) => {
-        console.log("hola!!");
+      onSubmit={(values, { resetForm }) => {
         postData(values.mail, values.contrasena);
+        resetForm();
       }}
     >
       {({ handleSubmit }) => {

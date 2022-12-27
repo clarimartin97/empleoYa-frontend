@@ -1,9 +1,9 @@
 import React from "react";
-import { Image, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import StyledText from "./StyledText.jsx";
 import theme from "../theme.js";
 
-const HeaderTrabajo = ({ fechaDePublicacion }) => {
+const HeaderTrabajo = ({ fechaPublicacion }) => {
   return (
     <View
       style={{
@@ -14,10 +14,10 @@ const HeaderTrabajo = ({ fechaDePublicacion }) => {
     >
       <View>
         <StyledText color="secondary" align="center">
-          Fecha de publicación:{" "}
+          Fecha de publicación:
         </StyledText>
         <StyledText color="secondary" align="center">
-          {fechaDePublicacion}
+          {fechaPublicacion}
         </StyledText>
       </View>
     </View>

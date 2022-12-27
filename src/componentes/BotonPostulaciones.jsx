@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   textoBotoncinDeshabilitado: {
     color: "#9B9999",
     fontSize: 14,
-    alignSelf: "start",
+    alignSelf: "flex-start",
     fontWeight: "bold",
   },
 });

@@ -1,7 +1,6 @@
 import React from "react-native";
 import { urlBase } from "../helpers/constantes";
-import { View, StyleSheet, Text, Image } from "react-native";
-import theme from "../theme.js";
+import { View, StyleSheet, Text } from "react-native";
 import { useIsFocused } from "@react-navigation/native";
 import { useEffect, useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
@@ -19,13 +18,11 @@ function MisPostulaciones(props) {
   const getData = async () => {
     getId().then(async (idUsuario) => {
       const postulacionesUrl = `${urlBase}postulaciones/${idUsuario}`;
-      console.log(postulacionesUrl);
       const response = await fetch(postulacionesUrl);
       const data = await response.json();
       setPostulaciones(data);
     });
   };
-  console.log(postulaciones);
   if (postulaciones.length > 0) {
     return (
       <View style={{ flex: 1 }}>
@@ -39,6 +36,7 @@ function MisPostulaciones(props) {
             deleteItem={() => {
               getData();
             }}
+            containerStyle={{ height: "85%" }}
           />
         </View>
         <Footer />

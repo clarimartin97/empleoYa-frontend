@@ -12,7 +12,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import MisPostulaciones from "./screens/MisPostulaciones.jsx";
 import LogOut from "./screens/LogOut.jsx";
 import UsuariosEditables from "./screens/UsuariosEditables.jsx";
-import NoHayPostulaciones from "./componentes/NoHayPostulaciones.jsx";
+import AgregarTrabajos from "./screens/AgregarTrabajos.jsx";
 
 const Menu = createDrawerNavigator();
 const Stack = createNativeStackNavigator();
@@ -42,6 +42,13 @@ const Main = () => {
             title: "Mi Usuario",
           }}
           component={InfoUsuario}
+        />
+        <Menu.Screen
+          name="AgregarTrabajos"
+          options={{
+            title: "Agregar Trabajos",
+          }}
+          component={AgregarTrabajos}
         />
 
         <Menu.Screen

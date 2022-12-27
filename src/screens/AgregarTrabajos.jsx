@@ -1,17 +1,25 @@
 import React from "react";
 import { Formik, useField } from "formik";
-import { StyleSheet, View, Image, TouchableOpacity, Text } from "react-native";
+import {
+  StyleSheet,
+  View,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+  Text,
+} from "react-native";
 import StyledTextInput from "../componentes/StyledTextInput.jsx";
 import StyledText from "../componentes/StyledText.jsx";
-import { signUpValidationSchema } from "../validationSchemas/validacion.js";
 import { urlBase } from "../helpers/constantes";
-import { storeData } from "../helpers/AsyncStorageHelper.js";
+import { agregarTrabajoValidationSchema } from "../validationSchemas/validacion.js";
 
 const initialValues = {
-  nombre: "",
-  apellido: "",
-  mail: "",
-  contrasena: "",
+  nombreDelPuesto: "",
+  duracion: "",
+  ubicacion: "",
+  requisitos: "",
+  descripcionDelPuesto: "",
+  modalidad: "",
 };
 
 const FormikInputValue = ({ name, ...props }) => {
@@ -29,91 +37,87 @@ const FormikInputValue = ({ name, ...props }) => {
   );
 };
 
-export default function SignUp(props) {
+export default function AgregarTrabajos(props) {
   const { navigation } = props;
-  const navegarAHome = () => {
-    navigation.navigate("Home");
-  };
-  const navegarALogIn = () => {
-    navigation.navigate("LogIn");
-  };
-  const postData = async (nombre, apellido, mail, contrasena) => {
-    const usuariosUrl = `${urlBase}signup`;
-    const response = await fetch(usuariosUrl, {
+
+  const postData = async (
+    nombreDelPuesto,
+    duracion,
+    ubicacion,
+    requisitos,
+    descripcionDelPuesto,
+    modalidad
+  ) => {
+    const trabajosUrl = `${urlBase}trabajo`;
+    const response = await fetch(trabajosUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        nombre: nombre,
-        apellido: apellido,
-        mail: mail,
-        contrasena: contrasena,
+        nombreDelPuesto: nombreDelPuesto,
+        duracion: duracion,
+        ubicacion: ubicacion,
+        requisitos: requisitos,
+        descripcionDelPuesto: descripcionDelPuesto,
+        modalidad: modalidad,
       }),
     })
       .then((respuesta) => respuesta.json())
       .then((datos) => {
         if (!datos.error) {
-          //loguear
-          storeData(datos._doc._id, nombre, apellido, mail);
-          navegarAHome();
+          //limpiar campos
+          alert("Se ha añadido el trabajo correctamente");
         } else {
-          //error
-          if (datos.error === "usuario_ya_existe") {
-            alert("El usuario ya existe");
-          } else {
-            alert("Hubo un error");
-          }
+          alert("Hubo un error");
         }
       });
   };
 
   return (
     <Formik
-      validationSchema={signUpValidationSchema}
+      validationSchema={agregarTrabajoValidationSchema}
       initialValues={initialValues}
       onSubmit={(values, { resetForm }) => {
         postData(
-          values.nombre,
-          values.apellido,
-          values.mail,
-          values.contrasena
+          values.nombreDelPuesto,
+          values.duracion,
+          values.ubicacion,
+          values.requisitos,
+          values.descripcionDelPuesto,
+          values.modalidad
         );
         resetForm();
       }}
     >
       {({ handleSubmit }) => {
         return (
-          <View style={styles.container}>
+          <ScrollView style={styles.container}>
             <View style={styles.form}>
               <Image
                 style={styles.image}
                 source={require("../../assets/logo.png")}
               />
 
-              <FormikInputValue name="nombre" placeholder="Escribir nombre" />
               <FormikInputValue
-                name="apellido"
-                placeholder="Escribir apellido"
+                name="nombreDelPuesto"
+                placeholder="Escribir nombre del puesto"
               />
-              <FormikInputValue name="mail" placeholder="Escribir E-mail" />
+              <FormikInputValue name="duracion" placeholder="Duracion" />
+              <FormikInputValue name="ubicacion" placeholder="Ubicacion" />
 
+              <FormikInputValue name="requisitos" placeholder="Requisitos" />
               <FormikInputValue
-                name="contrasena"
-                placeholder="Escribir contraseña"
-                secureTextEntry
+                name="descripcionDelPuesto"
+                placeholder="Descripcion del puesto"
               />
+              <FormikInputValue name="modalidad" placeholder="Modalidad" />
 
               <TouchableOpacity style={styles.botoncin} onPress={handleSubmit}>
-                <Text style={styles.textoBotoncin}>Crear cuenta</Text>
-              </TouchableOpacity>
-              <TouchableOpacity style={styles.link} onPress={navegarALogIn}>
-                <Text style={styles.linkTexto}>
-                  Ya tienes cuenta? Inicia sesión
-                </Text>
+                <Text style={styles.textoBotoncin}>Añadir</Text>
               </TouchableOpacity>
             </View>
-          </View>
+          </ScrollView>
         );
       }}
     </Formik>

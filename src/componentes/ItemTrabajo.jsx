@@ -8,10 +8,16 @@ import { useState } from "react";
 import { getId } from "../helpers/AsyncStorageHelper.js";
 import { useEffect } from "react";
 import { useIsFocused } from "@react-navigation/native";
+import Moment from "moment";
 
 function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
   const [trabajo, setTrabajo] = useState({ ...item });
   const isFocused = useIsFocused();
+  const fechaPublicacion = Moment(
+    item.createdAt,
+    Moment.HTML5_FMT.DATETIME_LOCAL_MS
+  ).format("YYYY-MM-DD");
+
   useEffect(() => {
     if (isFocused) setTrabajo({ ...item });
   }, [isFocused]);
@@ -50,7 +56,6 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
         deleteItem();
       });
   };
-
   if (puedoPostularme)
     return (
       <View key={trabajo._id} style={styles.container}>
@@ -72,7 +77,7 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
         <StyledText style={styles.estiloInformacion} fontWeight="bold">
           Modalidad: {trabajo.modalidad}
         </StyledText>
-        <FooterTrabajo {...trabajo} />
+        <FooterTrabajo fechaPublicacion={fechaPublicacion} />
         <BotonPostulaciones
           habilitado={!trabajo.estaPostulado}
           onPress={() => {
@@ -105,7 +110,7 @@ function ItemTrabajo({ item, puedoPostularme, deleteItem }) {
         <StyledText style={styles.estiloInformacion} fontWeight="bold">
           Modalidad: {trabajo.modalidad}
         </StyledText>
-        <FooterTrabajo {...trabajo} />
+        <FooterTrabajo fechaPublicacion={fechaPublicacion} />
 
         <TouchableOpacity
           style={styles.botoncin}

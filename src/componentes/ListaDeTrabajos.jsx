@@ -2,14 +2,18 @@ import React from "react";
 import { Text, StyleSheet, View, ActivityIndicator } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import ItemTrabajo from "./ItemTrabajo.jsx";
-import { useState } from "react";
 
-function ListaTrabajos({ trabajos, puedoPostularme, deleteItem }) {
+function ListaTrabajos({
+  trabajos,
+  puedoPostularme,
+  deleteItem,
+  containerStyle,
+}) {
   const keyExtractor = (item) => {
     return item._id;
   };
   return (
-    <View style={styles.container}>
+    <View style={containerStyle}>
       <FlatList
         data={trabajos}
         ItemSeparatorComponent={() => <Text></Text>}
@@ -27,8 +31,5 @@ function ListaTrabajos({ trabajos, puedoPostularme, deleteItem }) {
     </View>
   );
 }
-const styles = StyleSheet.create({
-  container: { height: "100%" },
-});
 
 export default ListaTrabajos;

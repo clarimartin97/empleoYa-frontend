@@ -1,12 +1,5 @@
 import React from "react-native";
-import {
-  View,
-  StyleSheet,
-  Text,
-  TextInput,
-  Image,
-  ActivityIndicator,
-} from "react-native";
+import { View, StyleSheet, Image, ActivityIndicator } from "react-native";
 import { useEffect } from "react";
 import {
   getApellido,
@@ -28,16 +21,12 @@ function SplashScreen(props) {
   const timerFunction = () => {
     setTimeout(() => {
       getId().then((id) => {
-        console.log(id);
         if (id != null) {
           getNombre().then((n) => {
-            console.log(n);
             if (n != null) {
               getApellido().then((a) => {
-                console.log(a);
                 if (a != null) {
                   getMail().then((m) => {
-                    console.log(m);
                     if (m != null) navegarAHome();
                     else navegarALogin();
                   });

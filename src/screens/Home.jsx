@@ -1,9 +1,8 @@
 import React from "react-native";
-import { Button, ButtonGroup, withTheme } from "@rneui/themed";
 import ListaTrabajos from "../componentes/ListaDeTrabajos.jsx";
 import { useIsFocused } from "@react-navigation/native";
-import { View, ActivityIndicator } from "react-native";
-import { getId, getNombre } from "../helpers/AsyncStorageHelper.js";
+import { View } from "react-native";
+import { getId } from "../helpers/AsyncStorageHelper.js";
 import Busqueda from "../componentes/Busqueda.jsx";
 import { useState, useEffect } from "react";
 import { urlBase } from "../helpers/constantes";
@@ -14,7 +13,6 @@ function HomeScreen(props) {
   const isFocused = useIsFocused();
   const [trabajos, setTrabajos] = useState([]);
 
-  getNombre().then((a) => console.log(a));
   useEffect(() => {
     if (isFocused) getData();
   }, [isFocused]);
@@ -22,8 +20,6 @@ function HomeScreen(props) {
   const onSearchPress = async (ubicacion, nombreDelPuesto) => {
     if (ubicacion === "") ubicacion = ".*";
     if (nombreDelPuesto === "") nombreDelPuesto = ".*";
-    console.log(ubicacion);
-    console.log(nombreDelPuesto);
     getId().then(async (idUsuario) => {
       const trabajosUrl = `${urlBase}trabajos/${idUsuario}/${ubicacion}/${nombreDelPuesto}`;
 
@@ -44,7 +40,11 @@ function HomeScreen(props) {
   return (
     <View style={{ flex: 1 }}>
       <Busqueda onSearchPress={onSearchPress} />
-      <ListaTrabajos trabajos={trabajos} puedoPostularme={true} />
+      <ListaTrabajos
+        trabajos={trabajos}
+        puedoPostularme={true}
+        containerStyle={{ height: "55%" }}
+      />
       <Footer />
     </View>
   );

@@ -6,10 +6,8 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
-  TextInput,
   ScrollView,
 } from "react-native";
-import UsuariosEditables from "./UsuariosEditables.jsx";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import StyledText from "../componentes/StyledText.jsx";
 import { useEffect, useState } from "react";
@@ -40,11 +38,8 @@ function InfoUsuario(props) {
   const getData = async () => {
     getId().then(async (id) => {
       const usersUrl = `${urlBase}usuarios/${id}`;
-      console.log(usersUrl);
       const response = await fetch(usersUrl);
-      console.log("response: " + response);
       const data = await response.json();
-      console.log(data);
       setUsuario(data);
     });
   };
